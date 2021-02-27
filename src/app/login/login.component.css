@@ -1,0 +1,81 @@
+.flex-direction {
+  display: flex;
+}
+
+.banner, .form-container {
+  flex: 1 1 50%;
+}
+
+.banner {
+  position: relative;
+  background-image: url('../../assets/images/banner.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.banner img {
+  position: absolute;
+  top: 35px;
+  left: 90px;
+}
+
+.form {
+  margin: auto;
+  padding: 0px;
+  width: 100%;
+  max-width: 380px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form img {
+  margin-bottom: 40px;
+}
+
+.form input, .form button:first-of-type {
+  width: 100%;
+  max-width: 380px;
+  height: 60px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  font-size: 1.07rem;
+  color: var(--white);
+}
+
+.form input {
+  background-color: var(--orange);
+  padding-left: 15px;
+}
+
+.form input::placeholder,
+.form input::-moz-placeholder {
+  color: var(--white);
+  opacity: 1;
+}
+
+.form button:last-of-type {
+  display: flex;
+  align-self: flex-end;
+  margin-right: 17px;
+  cursor: pointer;
+}
+
+.form button:last-of-type:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1080px) {
+  .banner, .banner img {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .form input, .form button:first-of-type {
+    width: 95%;
+  }
+}
