@@ -36,7 +36,7 @@
   margin-bottom: 40px;
 }
 
-.form input, .form button:first-of-type {
+.form button:first-of-type {
   width: 100%;
   max-width: 380px;
   height: 60px;
@@ -44,17 +44,6 @@
   border-radius: 3px;
   font-size: 1.07rem;
   color: var(--white);
-}
-
-.form input {
-  background-color: var(--orange);
-  padding-left: 15px;
-}
-
-.form input::placeholder,
-.form input::-moz-placeholder {
-  color: var(--white);
-  opacity: 1;
 }
 
 .form button:last-of-type {
@@ -71,11 +60,5 @@
 @media (max-width: 1080px) {
   .banner, .banner img {
     display: none;
-  }
-}
-
-@media (max-width: 380px) {
-  .form input, .form button:first-of-type {
-    width: 95%;
   }
 }
