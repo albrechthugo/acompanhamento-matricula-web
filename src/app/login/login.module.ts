@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { ButtonModule } from 'primeng/button';
-import { InputModule } from '../shared/components/input/input.module';
-
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,7 @@ import { InputModule } from '../shared/components/input/input.module';
     LoginRoutingModule,
     CommonModule,
     ButtonModule,
-    InputModule
+    InputTextModule
   ]
 })
 export class LoginModule { }
