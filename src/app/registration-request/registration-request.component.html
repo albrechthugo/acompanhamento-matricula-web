@@ -1,0 +1,60 @@
+<div class="container flex-column">
+  <div class="header-container">
+    <img src="../../assets/images/logo.svg" alt="Faculdade Senai De Tecnologia">
+    <h1>{{ 'solicitar cadastro' | uppercase }}</h1>
+  </div>
+
+  <main class="content-wrapper flex-column">
+    <form [formGroup]="form" class="flex-column">
+      <div class="form-field">
+        <label>{{ 'nome' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          [placeholder]="'joão da silva' | uppercase"
+          formControlName="name"
+        >
+      </div>
+
+      <div class="form-field">
+        <label>{{ 'cpf' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          placeholder="000.000.000-00"
+          formControlName="cpf"
+        >
+      </div>
+
+      <div class="form-field">
+        <label>{{ 'e-mail' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          [placeholder]="'joao.silva@email.com.br' | uppercase"
+          formControlName="email"
+        >
+      </div>
+
+      <div class="form-field">
+        <label>{{ 'setor' | uppercase }}</label>
+        <p-dropdown
+          [options]="roles"
+          optionLabel="label"
+          optionValue="value"
+          formControlName="role"
+          [placeholder]="'apoio vestibular' | uppercase"
+          [ngStyle]="{width: '100%'}">
+        </p-dropdown>
+      </div>
+
+      <button
+        pButton
+        (click)="registration()"
+        [label]="'solicitar' | uppercase"
+        type="button"
+        class="p-button-help p-button-lg">
+      </button>
+    </form>
+  </main>
+</div>
