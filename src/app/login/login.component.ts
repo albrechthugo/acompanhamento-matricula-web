@@ -13,6 +13,13 @@ export class LoginComponent implements OnInit {
     password: new FormControl()
   });
 
+  get user(): { email: string, password: string } {
+    return {
+      email: this.userForm.get('email')?.value,
+      password: this.userForm.get('password')?.value
+    };
+  }
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -28,10 +35,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.userForm.valid) {
-      const user = {
-        email: this.userForm.get('email')?.value,
-        password: this.userForm.get('password')?.value,
-      };
+      console.log('User', this.user);
     }
   }
 
