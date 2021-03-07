@@ -7,18 +7,18 @@
     <form [formGroup]="userForm" class="form">
       <img src="../../assets/images/student.svg" alt="Estudante">
       <input
-        pInputText
         formControlName="email"
         type="text"
         [placeholder]="'e-mail' | uppercase"
-        class="default-input">
+        pInputText
+      >
 
       <input
-        pInputText
         formControlName="password"
         type="password"
         [placeholder]="'senha' | uppercase"
-        class="default-input">
+        pInputText
+      >
 
       <button
         pButton
@@ -28,7 +28,9 @@
         class="p-button-help p-button-lg">
       </button>
 
-      <button class="btn-link">
+      <button
+        routerLink="/solicitarCadastro"
+        class="btn-link">
         Solicitar Cadastro
       </button>
     </form>
