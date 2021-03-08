@@ -4,12 +4,35 @@
   </div>
 
   <div class="form-container">
-    <form class="form">
+    <form [formGroup]="userForm" class="form">
       <img src="../../assets/images/student.svg" alt="Estudante">
-      <input pInputText type="text" [placeholder]="'e-mail' | uppercase" class="default-input">
-      <input pInputText type="password" [placeholder]="'senha' | uppercase" class="default-input">
-      <button pButton [label]="'login' | uppercase" type="button" class="p-button-help p-button-lg"></button>
-      <button class="btn-link">Solicitar Cadastro</button>
+      <input
+        formControlName="email"
+        type="text"
+        [placeholder]="'e-mail' | uppercase"
+        pInputText
+      >
+
+      <input
+        formControlName="password"
+        type="password"
+        [placeholder]="'senha' | uppercase"
+        pInputText
+      >
+
+      <button
+        pButton
+        (click)="login()"
+        [label]="'login' | uppercase"
+        type="button"
+        class="p-button-help p-button-lg">
+      </button>
+
+      <button
+        routerLink="/solicitarCadastro"
+        class="btn-link">
+        Solicitar Cadastro
+      </button>
     </form>
   </div>
 </main>
