@@ -37,7 +37,6 @@ export class RegistrationRequestComponent implements OnInit {
     { label: 'APOIO VESTIBULAR', value: Roles.VESTIBULAR_SUPPORT },
   ];
 
-
   constructor(private fb: FormBuilder, private employeeService: EmployeeService) { }
 
   ngOnInit(): void {

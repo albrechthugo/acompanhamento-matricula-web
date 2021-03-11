@@ -9,7 +9,7 @@ import { EmployeeDto } from '../../entities/employee/employee-dto';
 })
 export class EmployeeService {
 
-  get baseUrl(): string {
+  private get baseUrl(): string {
     return environment.API_URL;
   }
 
