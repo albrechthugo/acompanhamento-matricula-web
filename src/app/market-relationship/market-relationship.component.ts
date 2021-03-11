@@ -84,17 +84,17 @@ export class MarketRelationshipComponent implements OnInit {
     this.showInput = true;
 
     if (student.name === null && (student.phone === null && student.email === null)) {
-      this.createStudentButton.nativeElement.classList.remove('hidden');
       this.searchStudentButton.nativeElement.classList.add('hidden');
       this.newStudentSearchButton.nativeElement.classList.add('hidden');
     } else {
+      this.createStudentButton.nativeElement.classList.remove('hidden');
       this.searchStudentButton.nativeElement.classList.add('hidden');
       this.newStudentSearchButton.nativeElement.classList.remove('hidden');
       this.form.get('name')?.patchValue(student.name);
       this.form.get('cpf')?.patchValue(student.cpf);
       this.form.get('email')?.patchValue(student.email);
       this.form.get('phone')?.patchValue(student.phone);
-      this.form.disable();
+      this.form.get('cpf')?.disable();
     }
   }
 
