@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { validateCpf } from '../shared/validators/validators';
 import { EmployeeService } from '../services/employee/employee.service';
 import { EmployeeDto } from '../entities/employee/employee-dto';
-import { Roles } from '../entities/employee/roles/roles-enum';
 import { RolesUtils } from '../utils/roles-utils';
+import { MyValidators } from '../shared/validators/validators';
 
 @Component({
   selector: 'app-registration-request',
@@ -12,13 +11,6 @@ import { RolesUtils } from '../utils/roles-utils';
   styleUrls: ['./registration-request.component.css']
 })
 export class RegistrationRequestComponent implements OnInit {
-
-  form = new FormGroup({
-    name: new FormControl(),
-    cpf: new FormControl(),
-    email: new FormControl(),
-    role: new FormControl()
-  });
 
   get employee(): EmployeeDto {
     return {
@@ -29,24 +21,27 @@ export class RegistrationRequestComponent implements OnInit {
     };
   }
 
-  public roles: RolesUtils[] = [
-    { label: 'CORRETOR', value: Roles.CORRECTOR },
-    { label: 'FINANCEIRO', value: Roles.FINANCE },
-    { label: 'RELAÇÃO MERCADO', value: Roles.MARKET_RELATIONSHIP },
-    { label: 'SECRETARIA', value: Roles.SECRETARY },
-    { label: 'APOIO VESTIBULAR', value: Roles.VESTIBULAR_SUPPORT },
-  ];
+  form = new FormGroup({
+    name: new FormControl(),
+    cpf: new FormControl(),
+    email: new FormControl(),
+    role: new FormControl()
+  });
+
+  rolesutils = new RolesUtils();
+  roles: any[] = [];
 
   constructor(private fb: FormBuilder, private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
+    this.roles = this.rolesutils.roles;
     this.formBuilder();
   }
 
   formBuilder(): void {
     this.form = this.fb.group({
       name: [null, Validators.required],
-      cpf: [null, [Validators.required, validateCpf]],
+      cpf: [null, [Validators.required, MyValidators.validateCpf]],
       email: [null, [Validators.required, Validators.email]],
       role: [null, Validators.required]
     });

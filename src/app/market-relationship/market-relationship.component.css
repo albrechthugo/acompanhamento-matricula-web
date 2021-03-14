@@ -105,6 +105,10 @@
   display: none;
 }
 
+.popup-menu {
+  display: none;
+}
+
 :host ::ng-deep .menu-default.p-menu {
   position: absolute;
   z-index: 1;
@@ -158,6 +162,7 @@
   }
 
   .popup-menu {
+    display: unset;
     position: absolute;
     top: 25px;
     left: 35px;

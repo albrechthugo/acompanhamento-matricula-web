@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { validateCpf } from '../shared/validators/validators';
+import { MyValidators } from '../shared/validators/validators';
 import { StudentDto } from './../entities/student/student-dto';
 import { StudentService } from './../services/student/student.service';
+import { MenuUtils } from '../utils/menu-utils';
 
 @Component({
   selector: 'app-market-relationship',
@@ -33,12 +34,13 @@ export class MarketRelationshipComponent implements OnInit {
   });
 
   menuItems: MenuItem[] = [];
-  showInput: boolean = false;
+  showInput = false;
+  menuUtils = new MenuUtils();
 
   constructor(private fb: FormBuilder, private studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.setItems();
+    this.menuItems = this.menuUtils.menuItems;
     this.formBuilder();
     this.newStudentSearchButton.nativeElement.classList.add('hidden');
   }
@@ -46,22 +48,10 @@ export class MarketRelationshipComponent implements OnInit {
   formBuilder(): void {
     this.form = this.fb.group({
       name: [null, Validators.required],
-      cpf: [null, [Validators.required, validateCpf]],
+      cpf: [null, [Validators.required, MyValidators.validateCpf]],
       email: [null, [Validators.required, Validators.email]],
       phone: [null, Validators.required]
     });
-  }
-
-  setItems(): void {
-    this.menuItems = [
-      { label: 'RELAÇÃO MERCADO', icon: 'pi pi-file-o', routerLink: '/relacaoMercado' },
-      { label: 'FINANCEIRO', icon: 'pi pi-file-o', routerLink: '/relacaoMercado' },
-      { label: 'APOIO VESTIBULAR', icon: 'pi pi-file-o', routerLink: '/relacaoMercado' },
-      { label: 'SECRETARIA', icon: 'pi pi-file-o', routerLink: '/relacaoMercado' },
-      { label: 'CORRETOR', icon: 'pi pi-file-o', routerLink: '/relacaoMercado' },
-      { label: 'CADASTRO', icon: 'pi pi-file-o', routerLink: '/relacaoMercado' },
-      { label: 'RELATÓRIO', icon: 'pi pi-file-o', routerLink: '/relacaoMercado' }
-    ];
   }
 
   create(): void {
