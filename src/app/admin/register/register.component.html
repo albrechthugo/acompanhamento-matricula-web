@@ -1,10 +1,29 @@
 <div class="container flex-column">
   <div class="header-container">
     <img src="../../assets/images/logo.svg" alt="Faculdade Senai De Tecnologia">
-    <h1>{{ 'solicitar cadastro' | uppercase }}</h1>
+    <h1 class="username">
+      {{ 'username' | uppercase }}
+      <i class="pi pi-user"></i>
+    </h1>
   </div>
 
-  <main class="content-wrapper flex-column">
+  <main class="content-wrapper">
+    <p-menu [model]="menuItems" styleClass="menu-default"></p-menu>
+    <button
+      type="button"
+      pButton
+      icon="pi pi-bars"
+      [label]="'menu' | uppercase"
+      (click)="menu.toggle($event)"
+      class="popup-menu">
+    </button>
+    <p-menu
+      #menu
+      styleClass="popup-menu"
+      [popup]="true"
+      [model]="menuItems">
+    </p-menu>
+
     <form [formGroup]="form" class="flex-column">
       <div class="form-field">
         <label>{{ 'nome' | uppercase }}</label>
@@ -52,7 +71,7 @@
       <button
         pButton
         (click)="registration()"
-        [label]="'solicitar' | uppercase"
+        [label]="'cadastrar' | uppercase"
         type="button"
         class="p-button-help p-button-lg">
       </button>

@@ -20,43 +20,34 @@
 
 .content-wrapper {
   padding-top: 85px;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.form-container {
-  width: 100%;
-  height: 100%;
   padding-left: 250px;
+  width: 100%;
+  height: 100%;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.form-container h1 {
-  position: absolute;
-  top: 1rem;
-  left: 290px;
-  color: var(--purple);
-}
-
-.form-container form {
+.content-wrapper form {
   width: 700px;
   align-items: center;
 }
 
+.content-wrapper form button {
+  margin-top: 20px;
+  width: 35%;
+  height: 45px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+}
+
 .form-field {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  position: relative;
 }
 
 .form-field .p-inputtext {
@@ -64,7 +55,6 @@
 }
 
 .p-inputtext {
-  padding-left: 30px;
   margin-bottom: 15px;
 }
 
@@ -73,36 +63,6 @@
   margin-bottom: 10px;
   display: flex;
   align-self: flex-start;
-}
-
-.form-field button:first-of-type {
-  position: absolute;
-  top: 40px;
-  right: 10px;
-}
-
-.btn-link {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  cursor: pointer;
-}
-
-.btn-link:hover {
-  text-decoration: underline;
-}
-
-.insert-button {
-  margin-top: 10px;
-  display: flex;
-  align-self: flex-end;
-  width: 120px;
-  height: 45px;
-  font-size: 0.9rem;
-}
-
-.hidden {
-  display: none;
 }
 
 .popup-menu {
@@ -135,30 +95,26 @@
   color: var(--white);
 }
 
+:host ::ng-deep .dropdown-default.p-dropdown {
+  justify-content: space-between;
+}
+
+:host ::ng-deep .dropdown-default.p-dropdown .p-dropdown-label {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 1080px) {
-  .form-container {
-    padding: 0;
-    flex-direction: column;
-  }
-
-  .form-container h1 {
-    left: unset;
-  }
-
-  .form-container form {
-    padding: 0 10px;
-  }
-
-  .form-field {
-    width: 60%;
-  }
-
   :host ::ng-deep .menu-default.p-menu {
     display: none;
   }
 
   :host ::ng-deep .popup-menu.p-menu {
     width: 250px;
+  }
+
+  .content-wrapper {
+    padding-left: 0;
   }
 
   .popup-menu {
@@ -171,8 +127,12 @@
 }
 
 @media (max-width: 460px) {
+  .content-wrapper form {
+    padding: 0 10px;
+  }
+
   .form-field {
-    width: 50%;
+    width: 80%;
   }
 
   :host ::ng-deep .popup-menu.p-menu {
@@ -181,10 +141,6 @@
 }
 
 @media (max-width: 360px) {
-  .form-field {
-    width: 40%;
-  }
-
   .header-container .username {
     display: none;
   }

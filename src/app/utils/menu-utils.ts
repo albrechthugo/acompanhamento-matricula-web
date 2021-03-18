@@ -10,7 +10,7 @@ export class MenuUtils {
     { label: 'SECRETARIA', icon: 'pi pi-file-o', routerLink: '/secretaria' },
     { label: 'CORRETOR', icon: 'pi pi-file-o', routerLink: '/corretor' },
     { label: 'RELATÓRIO', icon: 'pi pi-file-o', routerLink: '/relatorio' },
-    { label: 'CADASTRO', icon: 'pi pi-file-o', routerLink: '/cadastro' }
+    { label: 'CADASTRO', icon: 'pi pi-file-o', routerLink: '/admin/cadastro' }
   ];
 
   get menuItems(): any {
