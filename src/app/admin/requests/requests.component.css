@@ -1,0 +1,226 @@
+.container {
+  overflow: hidden;
+}
+
+.popup-menu {
+  display: none;
+}
+
+.header-container {
+  justify-content: flex-end;
+}
+
+.header-container h1 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+}
+
+.header-container h1 i {
+  margin-left: 10px;
+  font-size: 2rem;
+}
+
+.content-wrapper {
+  padding-top: 85px;
+  padding-left: 250px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.content-wrapper h1 {
+  position: absolute;
+  top: 101px;
+  left: 290px;
+  color: var(--purple);
+}
+
+.requests-container {
+  width: 98%;
+  height: 100%;
+  margin-top: 60px;
+  padding-top: 20px;
+  overflow-y: auto;
+}
+
+.accordion-header {
+  padding: 0 30px;
+  width: 100%;
+}
+
+.accordion-content {
+  width: 100%;
+}
+
+.accordion-header p,
+.accordion-content p {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.accordion-header p {
+  justify-content: flex-start;
+}
+
+.accordion-content p {
+  justify-content: space-around;
+}
+
+.accordion-header p span,
+.accordion-content p span {
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: var(--light);
+  margin-left: 10px;
+}
+
+.accordion-header p span strong,
+.accordion-content p span strong {
+  text-transform: none;
+  color: #495057;
+  font-weight: var(--bold);
+  margin-left: 10px;
+}
+
+.accordion-header p span:first-of-type {
+  width: 250px;
+  text-overflow: ellipsis;
+}
+
+.accordion-content p span strong {
+  text-transform: uppercase;
+}
+
+:host ::ng-deep .menu-default.p-menu {
+  position: absolute;
+  z-index: 1;
+  top: 85px;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  padding-top: 1rem;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--orange);
+}
+
+:host ::ng-deep .menu-default.p-menu .p-menu-list {
+  width: 100%;
+}
+
+:host ::ng-deep .menu-default.p-menu .p-menu-list .p-menuitem-link:hover {
+  background-color: var(--purple);
+}
+
+:host ::ng-deep .menu-default.p-menu .p-menu-list .p-menuitem-link .p-menuitem-text,
+:host ::ng-deep .menu-default.p-menu .p-menuitem-link .p-menuitem-icon {
+  color: var(--white);
+}
+
+@media (max-width: 1400px) {
+  .accordion-header p {
+    justify-content: space-between;
+  }
+
+  .accordion-content p {
+    position: relative;
+    justify-content: flex-start;
+  }
+
+  .accordion-content p span {
+    justify-content: flex-start;
+    width: 300px;
+  }
+}
+
+@media (max-width: 1080px) {
+  :host ::ng-deep .menu-default.p-menu {
+    display: none;
+  }
+
+  :host ::ng-deep .popup-menu.p-menu {
+    width: 250px;
+  }
+
+  .content-wrapper {
+    padding-left: 0;
+  }
+
+  .content-wrapper h1 {
+    margin-top: 10px;
+    position: unset;
+    left: unset;
+  }
+
+  .popup-menu {
+    display: unset;
+    position: absolute;
+    top: 25px;
+    left: 35px;
+    z-index: 999;
+  }
+
+  .accordion-content p {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  :host ::ng-deep .splitbutton-default.p-splitbutton {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .accordion-content p span {
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 460px) {
+  :host ::ng-deep .popup-menu.p-menu {
+    width: 200px;
+  }
+
+  .accordion-header {
+    padding: 0;
+  }
+
+  .accordion-header p {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-container .username {
+    display: none;
+  }
+
+  .accordion-content p {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .accordion-content p span {
+    text-align: center;
+  }
+
+  :host ::ng-deep .splitbutton-default.p-splitbutton {
+    position: unset;
+    right: unset;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  :host ::ng-deep .popup-menu.p-menu {
+    width: 170px;
+  }
+}

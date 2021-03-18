@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'relacaoMercado',
     loadChildren: () => import('./market-relationship/market-relationship.module').then(m => m.MarketRelationshipModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
 ];
 
