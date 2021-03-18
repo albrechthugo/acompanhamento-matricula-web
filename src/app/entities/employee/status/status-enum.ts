@@ -1,0 +1,5 @@
+export enum Status {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  PENDING_ACTIVATION = 'PENDING_ACTIVATION'
+}
