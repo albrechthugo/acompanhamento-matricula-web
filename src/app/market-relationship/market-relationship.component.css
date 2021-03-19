@@ -2,22 +2,6 @@
   overflow: hidden;
 }
 
-.header-container {
-  justify-content: flex-end;
-}
-
-.header-container h1 {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  font-size: 1.3rem;
-}
-
-.header-container h1 i {
-  margin-left: 10px;
-  font-size: 2rem;
-}
-
 .content-wrapper {
   padding-top: 85px;
   width: 100%;
@@ -101,10 +85,6 @@
   font-size: 0.9rem;
 }
 
-.hidden {
-  display: none;
-}
-
 .popup-menu {
   display: none;
 }
@@ -183,10 +163,6 @@
 @media (max-width: 360px) {
   .form-field {
     width: 40%;
-  }
-
-  .header-container .username {
-    display: none;
   }
 
   :host ::ng-deep .popup-menu.p-menu {

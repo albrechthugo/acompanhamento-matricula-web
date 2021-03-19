@@ -49,39 +49,16 @@ body {
   overflow-x: hidden;
 }
 
-.header-container {
-  background-color: var(--purple);
-  height: 85px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 997;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  padding: 0 35px;
-}
-
-.header-container img {
-  width: 110px;
-  height: 110px;
-  position: fixed;
-  left: 32px;
-}
-
-.header-container h1 {
-  color: var(--white);
-  display: flex;
-  margin: 0 auto;
-}
-
 .btn-link {
   background-color: transparent;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 13px;
   color: var(--pink);
+}
+
+#hidden {
+  display: none;
 }
 
 .p-inputtext {
@@ -97,12 +74,6 @@ body {
 .flex-column {
   display: flex;
   flex-direction: column;
-}
-
-@media (max-width: 1080px) {
-  .header-container img {
-    display: none;
-  }
 }
 
 @media (max-width: 460px) {

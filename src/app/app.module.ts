@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { HeaderModule } from './shared/components/header/header.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -14,7 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HeaderModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
