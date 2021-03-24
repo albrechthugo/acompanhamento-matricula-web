@@ -61,6 +61,24 @@
   margin-bottom: 10px;
 }
 
+
+@keyframes p-progress-spinner-color {
+  100%,
+  0% {
+    stroke: var(--purple);
+  }
+  40% {
+    stroke: var(--orange);
+  }
+  66% {
+    stroke: var(--purple);
+  }
+  80%,
+  90% {
+    stroke: var(--orange);
+  }
+}
+
 @media (max-width: 1080px) {
   .banner, .banner img {
     display: none;

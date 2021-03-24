@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +9,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  userForm = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl()
-  });
-
   get user(): { email: string, password: string } {
     return {
       email: this.userForm.get('email')?.value,
@@ -20,22 +16,32 @@ export class LoginComponent implements OnInit {
     };
   }
 
-  constructor(private fb: FormBuilder) { }
+  public userForm = new FormGroup({
+    email: new FormControl(),
+    password: new FormControl()
+  });
+
+  public canBlockUi = false;
+
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.formBuilder();
   }
 
-  formBuilder(): void {
+  private formBuilder(): void {
    this.userForm = this.fb.group({
      email: [null, [Validators.required, Validators.email]],
      password: [null, Validators.required]
    });
   }
 
-  login(): void {
+  public login(): void {
     if (this.userForm.valid) {
-      console.log('User', this.user);
+      this.canBlockUi = true;
+      setTimeout(() => {
+        this.router.navigateByUrl('/dashboard');
+      }, 3000);
     }
   }
 
