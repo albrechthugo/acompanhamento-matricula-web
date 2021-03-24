@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
+import { RouterModule } from '@angular/router';
+import {ChartModule} from 'primeng/chart';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -9,7 +14,12 @@ import { DashboardComponent } from './dashboard.component';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    ButtonModule,
+    MenuModule,
+    RouterModule,
+    ChartModule,
+    TableModule
   ]
 })
 export class DashboardModule { }

@@ -24,17 +24,17 @@ export class RegisterComponent implements OnInit {
     };
   }
 
-  form = new FormGroup({
+  public form = new FormGroup({
     name: new FormControl(),
     cpf: new FormControl(),
     email: new FormControl(),
     role: new FormControl()
   });
 
-  menuItems: MenuItem[] = [];
-  menuUtils = new MenuUtils();
-  rolesutils = new RolesUtils();
-  roles: any[] = [];
+  public tabItems: MenuItem[] = [];
+  public roles: any[] = [];
+  private menuUtils = new MenuUtils();
+  private rolesutils = new RolesUtils();
 
   constructor(
     private fb: FormBuilder,
@@ -42,12 +42,12 @@ export class RegisterComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.roles = this.rolesutils.roles;
-    this.menuItems = this.menuUtils.menuItems;
+    this.setRoles();
+    this.setTabItems();
     this.formBuilder();
   }
 
-  formBuilder(): void {
+  private formBuilder(): void {
     this.form = this.fb.group({
       name: [null, Validators.required],
       cpf: [null, [Validators.required, MyValidators.validateCpf]],
@@ -56,7 +56,15 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  registration(): void {
+  private setTabItems(): void {
+    this.tabItems = this.menuUtils.adminTabItems;
+  }
+
+  private setRoles(): void {
+    this.roles = this.rolesutils.roles;
+  }
+
+  public registration(): void {
     if (this.form.valid) {
       this.employeeService.create(this.employee)
         .subscribe(() => {

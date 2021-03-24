@@ -1,0 +1,51 @@
+.container {
+  overflow: hidden;
+}
+
+.content-wrapper {
+  padding-top: 85px;
+  padding-left: 250px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*overflow-y: auto;*/
+}
+
+.page-title, .pi-download {
+  position: absolute;
+  top: 101px;
+  font-size: 2.4rem;
+  color: var(--purple);
+}
+
+.page-title {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pi-download {
+  cursor: pointer;
+  right: 60px;
+  transition: 0.2s;
+}
+
+.pi-download:hover {
+  opacity: 70%;
+}
+
+.chart-container {
+  width: 50%;
+}
+
+.status-container {
+  width: 100%;
+}
+
+@media (max-width: 1080px) {
+  .content-wrapper {
+    padding-left: 0;
+  }
+}

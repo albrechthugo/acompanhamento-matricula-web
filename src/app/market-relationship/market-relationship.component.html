@@ -1,21 +1,5 @@
 <div class="container flex-column">
   <main class="content-wrapper">
-    <p-menu [model]="menuItems" styleClass="menu-default"></p-menu>
-    <button
-      type="button"
-      pButton
-      icon="pi pi-bars"
-      [label]="'menu' | uppercase"
-      (click)="menu.toggle($event)"
-      class="popup-menu">
-    </button>
-    <p-menu
-      #menu
-      styleClass="popup-menu"
-      [popup]="true"
-      [model]="menuItems">
-    </p-menu>
-
     <div class="form-container">
      <h1>{{ 'inserir dados do aluno' | uppercase }}</h1>
 
@@ -29,17 +13,17 @@
           formControlName="cpf"
          >
          <button
+          *ngIf="canShowSearchStudentButton"
           pButton
           pRipple
           type="button"
           icon="pi pi-search"
-          #searchStudentButton
           class="p-button-rounded p-button-help p-button-lg p-button-text"
           (click)="searchStudent(form.get('cpf')?.value)">
         </button>
 
         <button
-          #newStudentSearchButton
+          *ngIf="canShowNewStudentSearchButton"
           (click)="newStudentSearch()"
           class="btn-link">
           {{'nova consulta' | uppercase}}
@@ -77,7 +61,7 @@
       </div>
 
       <button
-        #createStudentButton
+        *ngIf="canShowCreateStudentButton"
         pButton
         (click)="create()"
         [label]="'inserir' | uppercase"

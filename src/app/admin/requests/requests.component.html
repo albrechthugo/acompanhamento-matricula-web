@@ -1,24 +1,10 @@
 <div class="container flex-column">
   <main class="content-wrapper flex-column">
-    <p-menu [model]="menuItems" styleClass="menu-default"></p-menu>
-    <button
-      type="button"
-      pButton
-      icon="pi pi-bars"
-      [label]="'menu' | uppercase"
-      (click)="menu.toggle($event)"
-      class="popup-menu">
-    </button>
-    <p-menu
-      #menu
-      styleClass="popup-menu"
-      [popup]="true"
-      [model]="menuItems">
-    </p-menu>
-
-    <h1>
-      {{ 'solicitações' | uppercase }}
-    </h1>
+    <p-tabMenu
+      class="tab-menu-top"
+      [model]="tabItems"
+      [activeItem]="tabItems[1]">
+    </p-tabMenu>
 
     <div class="requests-container">
       <p-accordion [multiple]="true">

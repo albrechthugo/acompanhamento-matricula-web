@@ -1,20 +1,10 @@
 <div class="container flex-column">
   <main class="content-wrapper">
-    <p-menu [model]="menuItems" styleClass="menu-default"></p-menu>
-    <button
-      type="button"
-      pButton
-      icon="pi pi-bars"
-      [label]="'menu' | uppercase"
-      (click)="menu.toggle($event)"
-      class="popup-menu">
-    </button>
-    <p-menu
-      #menu
-      styleClass="popup-menu"
-      [popup]="true"
-      [model]="menuItems">
-    </p-menu>
+    <p-tabMenu
+      class="tab-menu-top"
+      [model]="tabItems"
+      [activeItem]="tabItems[0]">
+    </p-tabMenu>
 
     <form [formGroup]="form" class="flex-column">
       <div class="form-field">

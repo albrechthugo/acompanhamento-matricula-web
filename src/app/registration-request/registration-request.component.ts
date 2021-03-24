@@ -21,24 +21,24 @@ export class RegistrationRequestComponent implements OnInit {
     };
   }
 
-  form = new FormGroup({
+  public form = new FormGroup({
     name: new FormControl(),
     cpf: new FormControl(),
     email: new FormControl(),
     role: new FormControl()
   });
 
-  rolesutils = new RolesUtils();
-  roles: any[] = [];
+  private rolesutils = new RolesUtils();
+  public roles: any[] = [];
 
   constructor(private fb: FormBuilder, private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
-    this.roles = this.rolesutils.roles;
+    this.setRoles();
     this.formBuilder();
   }
 
-  formBuilder(): void {
+  private formBuilder(): void {
     this.form = this.fb.group({
       name: [null, Validators.required],
       cpf: [null, [Validators.required, MyValidators.validateCpf]],
@@ -47,7 +47,11 @@ export class RegistrationRequestComponent implements OnInit {
     });
   }
 
-  registration(): void {
+  private setRoles(): void {
+    this.roles = this.rolesutils.roles;
+  }
+
+  public registration(): void {
     if (this.form.valid) {
       this.employeeService.create(this.employee)
         .subscribe(() => console.log(this.employee, 'Sucess employee registration!'));

@@ -11,6 +11,7 @@ import { CpfMaskModule } from 'src/app/shared/pipes/cpf-mask/cpf-mask.module';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     CpfMaskModule,
     i18nPipeModule,
     ConfirmDialogModule,
-    SplitButtonModule
+    SplitButtonModule,
+    TabMenuModule
   ],
   providers: [
     ConfirmationService,

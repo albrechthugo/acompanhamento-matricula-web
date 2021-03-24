@@ -1,10 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MenuItem } from 'primeng/api';
 import { MyValidators } from '../shared/validators/validators';
 import { StudentDto } from './../entities/student/student-dto';
 import { StudentService } from './../services/student/student.service';
-import { MenuUtils } from '../utils/menu-utils';
 
 @Component({
   selector: 'app-market-relationship',
@@ -12,10 +10,6 @@ import { MenuUtils } from '../utils/menu-utils';
   styleUrls: ['./market-relationship.component.css']
 })
 export class MarketRelationshipComponent implements OnInit {
-
-  @ViewChild('createStudentButton', { static: false }) createStudentButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('searchStudentButton', { static: false }) searchStudentButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('newStudentSearchButton', { static: true }) newStudentSearchButton!: ElementRef<HTMLButtonElement>;
 
   get student(): StudentDto {
     return {
@@ -26,26 +20,25 @@ export class MarketRelationshipComponent implements OnInit {
     };
   }
 
-  form = new FormGroup({
+  public form = new FormGroup({
     name: new FormControl(),
     cpf: new FormControl(),
     email: new FormControl(),
     phone: new FormControl()
   });
 
-  menuItems: MenuItem[] = [];
-  showInput = false;
-  menuUtils = new MenuUtils();
+  public canShowCreateStudentButton = false;
+  public canShowSearchStudentButton = true;
+  public canShowNewStudentSearchButton = false;
+  public showInput = false;
 
   constructor(private fb: FormBuilder, private studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.menuItems = this.menuUtils.menuItems;
     this.formBuilder();
-    this.newStudentSearchButton.nativeElement.classList.add('hidden');
   }
 
-  formBuilder(): void {
+  private formBuilder(): void {
     this.form = this.fb.group({
       name: [null, Validators.required],
       cpf: [null, [Validators.required, MyValidators.validateCpf]],
@@ -54,7 +47,7 @@ export class MarketRelationshipComponent implements OnInit {
     });
   }
 
-  create(): void {
+  public create(): void {
     if (this.form.valid) {
       this.studentService.create(this.student).subscribe(() => {
         console.log(this.student, 'Student created');
@@ -62,7 +55,7 @@ export class MarketRelationshipComponent implements OnInit {
     }
   }
 
-  searchStudent(cpf: string): void {
+  public searchStudent(cpf: string): void {
     if (cpf) {
       this.studentService.getById(cpf).subscribe(student => {
         this.showStudent(student);
@@ -70,29 +63,28 @@ export class MarketRelationshipComponent implements OnInit {
     }
   }
 
-  showStudent(student: StudentDto): void {
+  private showStudent(student: StudentDto): void {
     this.showInput = true;
+    this.canShowSearchStudentButton = false;
+    this.canShowCreateStudentButton = true;
+    this.canShowNewStudentSearchButton = true;
 
-    if (student.name === null && (student.phone === null && student.email === null)) {
-      this.searchStudentButton.nativeElement.classList.add('hidden');
-      this.newStudentSearchButton.nativeElement.classList.add('hidden');
-    } else {
-      this.createStudentButton.nativeElement.classList.remove('hidden');
-      this.searchStudentButton.nativeElement.classList.add('hidden');
-      this.newStudentSearchButton.nativeElement.classList.remove('hidden');
-      this.form.get('name')?.patchValue(student.name);
-      this.form.get('cpf')?.patchValue(student.cpf);
-      this.form.get('email')?.patchValue(student.email);
-      this.form.get('phone')?.patchValue(student.phone);
+    this.form.get('name')?.patchValue(student.name);
+    this.form.get('cpf')?.patchValue(student.cpf);
+    this.form.get('email')?.patchValue(student.email);
+    this.form.get('phone')?.patchValue(student.phone);
+
+    if (student.cpf === null && student.cpf === '' ) {
       this.form.get('cpf')?.disable();
     }
   }
 
-  newStudentSearch(): void {
+  public newStudentSearch(): void {
     this.form.reset();
     this.form.enable();
     this.showInput = false;
-    this.searchStudentButton.nativeElement.classList.remove('hidden');
-    this.newStudentSearchButton.nativeElement.classList.add('hidden');
+    this.canShowSearchStudentButton = true;
+    this.canShowNewStudentSearchButton = false;
+    this.canShowCreateStudentButton = false;
   }
 }

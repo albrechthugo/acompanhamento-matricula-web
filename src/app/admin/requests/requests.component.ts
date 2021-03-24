@@ -14,9 +14,9 @@ import { switchMap } from 'rxjs/operators';
 })
 export class RequestsComponent implements OnInit {
 
-  menuItems: MenuItem[] = [];
-  actionItems: MenuItem[] = [];
-  requestPending: EmployeeDto[] = [];
+  public tabItems: MenuItem[] = [];
+  public actionItems: MenuItem[] = [];
+  public requestPending: EmployeeDto[] = [];
   private menuUtils = new MenuUtils();
 
   constructor(
@@ -27,29 +27,29 @@ export class RequestsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.menuItems = this.menuUtils.menuItems;
+    this.setTabItems();
     this.getTotalRequestsPending();
   }
 
-  getTotalRequestsPending(): void {
+  private getTotalRequestsPending(): void {
     this.employeeService.getAllPendingActivation().subscribe(requests => {
       this.requestPending = requests;
     });
   }
 
-  activeEmployee(employee: EmployeeDto): void {
+  private activeEmployee(employee: EmployeeDto): void {
     this.employeeService.update(employee, Status.ACTIVE)
       .pipe(switchMap(() => this.employeeService.getAllPendingActivation()))
       .subscribe(requests => this.requestPending = requests);
   }
 
-  deleteEmployee(employee: EmployeeDto): void {
+  private deleteEmployee(employee: EmployeeDto): void {
     this.employeeService.delete(employee)
       .pipe(switchMap(() => this.employeeService.getAllPendingActivation()))
       .subscribe(requests => this.requestPending = requests);
   }
 
-  confirm(employee: EmployeeDto, active?: boolean): void {
+  private confirm(employee: EmployeeDto, active?: boolean): void {
     this.confirmationService.confirm({
       message: active ? 'Ativar cadastro do funcionário?' : 'Deseja excluir a solicitação?',
       acceptLabel: 'Sim',
@@ -61,7 +61,11 @@ export class RequestsComponent implements OnInit {
     });
   }
 
-  setButtonActions(employee: EmployeeDto): void {
+  private setTabItems(): void {
+    this.tabItems = this.menuUtils.adminTabItems;
+  }
+
+  public setButtonActions(employee: EmployeeDto): void {
     this.actionItems = [{ label: 'Excluir', icon: 'pi pi-trash', command: () => this.confirm(employee) }];
   }
 }

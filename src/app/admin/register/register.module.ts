@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
 import { DropdownModule } from 'primeng/dropdown';
 import { RouterModule } from '@angular/router';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RouterModule } from '@angular/router';
     InputTextModule,
     MenuModule,
     DropdownModule,
-    RouterModule
+    RouterModule,
+    TabMenuModule
   ]
 })
 export class RegisterModule { }
