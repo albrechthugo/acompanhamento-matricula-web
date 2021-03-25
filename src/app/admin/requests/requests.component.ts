@@ -5,7 +5,8 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { MenuUtils } from './../../utils/menu-utils';
 import { Component, OnInit } from '@angular/core';
 import { Status } from 'src/app/entities/employee/status/status-enum';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
+import { MessageUtils } from '../../utils/message-utils';
 
 @Component({
   selector: 'app-requests',
@@ -14,6 +15,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class RequestsComponent implements OnInit {
 
+  public canBlockUi = true;
   public tabItems: MenuItem[] = [];
   public actionItems: MenuItem[] = [];
   public requestPending: EmployeeDto[] = [];
@@ -33,23 +35,32 @@ export class RequestsComponent implements OnInit {
 
   private getTotalRequestsPending(): void {
     this.employeeService.getAllPendingActivation().subscribe(requests => {
+      this.canBlockUi = false;
       this.requestPending = requests;
     });
   }
 
   private activeEmployee(employee: EmployeeDto): void {
     this.employeeService.update(employee, Status.ACTIVE)
-      .pipe(switchMap(() => this.employeeService.getAllPendingActivation()))
-      .subscribe(requests => this.requestPending = requests);
+      .pipe(
+        tap(() => this.messageService.add(MessageUtils.EmployeeSuccessActive()),
+          () => this.messageService.add(MessageUtils.EmployeeErrorActive())
+        ),
+        switchMap(() => this.employeeService.getAllPendingActivation())
+      ).subscribe(requests => this.requestPending = requests);
   }
 
   private deleteEmployee(employee: EmployeeDto): void {
     this.employeeService.delete(employee)
-      .pipe(switchMap(() => this.employeeService.getAllPendingActivation()))
+      .pipe(
+        tap(() => this.messageService.add(MessageUtils.EmployeeSuccessDelete()),
+          () => this.messageService.add(MessageUtils.EmployeeErrorDelete())
+        ),
+        switchMap(() => this.employeeService.getAllPendingActivation()))
       .subscribe(requests => this.requestPending = requests);
   }
 
-  private confirm(employee: EmployeeDto, active?: boolean): void {
+  public confirm(employee: EmployeeDto, active?: boolean): void {
     this.confirmationService.confirm({
       message: active ? 'Ativar cadastro do funcionário?' : 'Deseja excluir a solicitação?',
       acceptLabel: 'Sim',

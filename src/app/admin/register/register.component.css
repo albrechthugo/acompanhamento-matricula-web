@@ -55,6 +55,15 @@
   align-self: flex-start;
 }
 
+:host ::ng-deep .dropdown-default.p-dropdown {
+  justify-content: space-between;
+}
+
+:host ::ng-deep .dropdown-default.p-dropdown .p-dropdown-label {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 1080px) {
   .content-wrapper {
     padding-left: 0;

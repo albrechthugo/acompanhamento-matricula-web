@@ -12,6 +12,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { ToastModule } from 'primeng/toast';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { TabMenuModule } from 'primeng/tabmenu';
     i18nPipeModule,
     ConfirmDialogModule,
     SplitButtonModule,
-    TabMenuModule
+    TabMenuModule,
+    ToastModule,
+    BlockUIModule,
+    ProgressSpinnerModule
   ],
   providers: [
     ConfirmationService,

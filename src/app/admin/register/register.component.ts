@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { MenuUtils } from '../../utils/menu-utils';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyValidators } from '../../shared/validators/validators';
@@ -7,6 +7,7 @@ import { RolesUtils } from '../../utils/roles-utils';
 import { EmployeeDto } from '../../entities/employee/employee-dto';
 import { EmployeeService } from '../../services/employee/employee.service';
 import { Router } from '@angular/router';
+import { MessageUtils } from '../../utils/message-utils';
 
 @Component({
   selector: 'app-register',
@@ -39,7 +40,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private employeeService: EmployeeService,
-    private router: Router) { }
+    private router: Router,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.setRoles();
@@ -68,7 +70,10 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       this.employeeService.create(this.employee)
         .subscribe(() => {
-          this.router.navigateByUrl('/admin/solicitacoes');
+          this.messageService.add(MessageUtils.EmployeeSuccessRegistration());
+          setTimeout(() => this.router.navigateByUrl('/admin/solicitacoes'), 1000);
+        }, () => {
+          this.messageService.add(MessageUtils.EmployeeErrorRegistration());
         });
     }
   }

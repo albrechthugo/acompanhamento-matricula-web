@@ -9,6 +9,8 @@ import { MenuModule } from 'primeng/menu';
 import { DropdownModule } from 'primeng/dropdown';
 import { RouterModule } from '@angular/router';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { TabMenuModule } from 'primeng/tabmenu';
     MenuModule,
     DropdownModule,
     RouterModule,
-    TabMenuModule
-  ]
+    TabMenuModule,
+    ToastModule
+  ],
+  providers: [MessageService]
 })
 export class RegisterModule { }

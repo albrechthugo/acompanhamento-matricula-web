@@ -43,3 +43,11 @@
     </div>
   </main>
 </div>
+
+<p-toast position="top-center"></p-toast>
+
+<p-blockUI
+  [baseZIndex]="999"
+  [blocked]="canBlockUi">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
