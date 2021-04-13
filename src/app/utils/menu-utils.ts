@@ -19,13 +19,14 @@ export class MenuUtils {
   }
 
   private _menuItems: MenuItem[] = [
-    { label: 'RELAÇÃO MERCADO', icon: PrimeIcons.FOLDER, routerLink: '/relacaoMercado' },
-    { label: 'FINANCEIRO', icon: PrimeIcons.FOLDER, routerLink: '/financeiro' },
-    { label: 'APOIO VESTIBULAR', icon: PrimeIcons.FOLDER, routerLink: '/apoioVestibular' },
+    { label: 'INÍCIO', icon: PrimeIcons.HOME, routerLink: '/dashboard' },
+    { label: 'RELAÇÃO MERCADO', icon: PrimeIcons.GLOBE, routerLink: '/relacaoMercado' },
+    { label: 'FINANCEIRO', icon: PrimeIcons.DOLLAR, routerLink: '/financeiro' },
+    { label: 'APOIO VESTIBULAR', icon: PrimeIcons.PENCIL, routerLink: '/apoioVestibular' },
     { label: 'SECRETARIA', icon: PrimeIcons.FOLDER, routerLink: '/secretaria' },
-    { label: 'CORRETOR', icon: PrimeIcons.FOLDER, routerLink: '/corretor' },
-    { label: 'RELATÓRIO', icon: PrimeIcons.FOLDER, routerLink: '/relatorioMatriculas' },
-    { label: 'CADASTRO', icon: PrimeIcons.FOLDER, routerLink: '/admin' }
+    { label: 'CORRETOR', icon: PrimeIcons.CHECK_CIRCLE, routerLink: '/corretor' },
+    { label: 'RELATÓRIO', icon: PrimeIcons.CHART_BAR, routerLink: '/relatorioMatriculas' },
+    { label: 'CADASTRO', icon: PrimeIcons.DESKTOP, routerLink: '/admin' }
   ];
 
   private _adminTabItems: MenuItem[] = [

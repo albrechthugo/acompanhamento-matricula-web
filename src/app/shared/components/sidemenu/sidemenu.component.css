@@ -26,6 +26,7 @@
 :host ::ng-deep .menu-default.p-menu .p-menu-list .p-menuitem-link .p-menuitem-text,
 :host ::ng-deep .menu-default.p-menu .p-menuitem-link .p-menuitem-icon {
   color: var(--white);
+  font-size: 1.2rem;
 }
 
 @media (max-width: 1080px) {
