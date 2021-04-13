@@ -1,29 +1,6 @@
-import { MenuItem } from 'primeng/api';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 
 export class MenuUtils {
-
-  // tslint:disable-next-line:variable-name
-  private _menuItems: MenuItem[] = [
-    { label: 'RELAÇÃO MERCADO', icon: 'pi pi-file-o', routerLink: '/relacaoMercado' },
-    { label: 'FINANCEIRO', icon: 'pi pi-file-o', routerLink: '/financeiro' },
-    { label: 'APOIO VESTIBULAR', icon: 'pi pi-file-o', routerLink: '/apoioVestibular' },
-    { label: 'SECRETARIA', icon: 'pi pi-file-o', routerLink: '/secretaria' },
-    { label: 'CORRETOR', icon: 'pi pi-file-o', routerLink: '/corretor' },
-    { label: 'RELATÓRIO', icon: 'pi pi-file-o', routerLink: '/relatorioMatriculas' },
-    { label: 'CADASTRO', icon: 'pi pi-file-o', routerLink: '/admin' }
-  ];
-
-  // tslint:disable-next-line:variable-name
-  private _adminTabItems: MenuItem[] = [
-    { label: 'CADASTRO', icon: 'pi pi-user-plus', routerLink: '/admin/cadastro' },
-    { label: 'SOLICITAÇÕES', icon: 'pi pi-exclamation-circle', routerLink: '/admin/solicitacoes' }
-  ];
-
-  // tslint:disable-next-line:variable-name
-  private _vestibularSupportTabItems: MenuItem[] = [
-    { label: 'PROVA', icon: 'pi pi-pencil', routerLink: '/apoioVestibular/enviarProvaVestibular' },
-    { label: 'CORREÇÃO', icon: 'pi pi-chart-line', routerLink: '/apoioVestibular/enviarProvaCorrecao' }
-  ];
 
   get menuItems(): MenuItem[] {
     return this._menuItems;
@@ -36,4 +13,33 @@ export class MenuUtils {
   get vestibularSupportTabItems(): MenuItem[] {
     return this._vestibularSupportTabItems;
   }
+
+  get secretaryTabItems(): MenuItem[] {
+    return this._secretaryTabItems;
+  }
+
+  private _menuItems: MenuItem[] = [
+    { label: 'RELAÇÃO MERCADO', icon: PrimeIcons.FOLDER, routerLink: '/relacaoMercado' },
+    { label: 'FINANCEIRO', icon: PrimeIcons.FOLDER, routerLink: '/financeiro' },
+    { label: 'APOIO VESTIBULAR', icon: PrimeIcons.FOLDER, routerLink: '/apoioVestibular' },
+    { label: 'SECRETARIA', icon: PrimeIcons.FOLDER, routerLink: '/secretaria' },
+    { label: 'CORRETOR', icon: PrimeIcons.FOLDER, routerLink: '/corretor' },
+    { label: 'RELATÓRIO', icon: PrimeIcons.FOLDER, routerLink: '/relatorioMatriculas' },
+    { label: 'CADASTRO', icon: PrimeIcons.FOLDER, routerLink: '/admin' }
+  ];
+
+  private _adminTabItems: MenuItem[] = [
+    { label: 'CADASTRO', icon: PrimeIcons.USER_PLUS, routerLink: '/admin/cadastro' },
+    { label: 'SOLICITAÇÕES', icon: PrimeIcons.EXCLAMATION_CIRCLE, routerLink: '/admin/solicitacoes' }
+  ];
+
+  private _vestibularSupportTabItems: MenuItem[] = [
+    { label: 'PROVA', icon: PrimeIcons.PENCIL, routerLink: '/apoioVestibular/enviarProvaVestibular' },
+    { label: 'CORREÇÃO', icon: PrimeIcons.CHART_LINE, routerLink: '/apoioVestibular/enviarProvaCorrecao' }
+  ];
+
+  private _secretaryTabItems: MenuItem[] = [
+    { label: 'SECRETARIA', icon: PrimeIcons.BOOK, routerLink: '/secretaria/' },
+    { label: 'DOCUMENTOS', icon: PrimeIcons.CLOUD_UPLOAD, routerLink: '/secretaria/uploadDocumentos' }
+  ];
 }

@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./vestibular-support/vestibular-support.module').then(m => m.VestibularSupportModule)
   },
   {
+    path: 'secretaria',
+    loadChildren: () => import('./secretary/secretary.module').then(m => m.SecretaryModule)
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }

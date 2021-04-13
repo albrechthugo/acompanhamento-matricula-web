@@ -1,22 +1,21 @@
-import { MessageUtils } from './../../utils/message-utils';
-import { StudentService } from './../../services/student/student.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, MessageService } from 'primeng/api';
 import { MenuUtils } from '../../utils/menu-utils';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { StudentService } from '../../services/student/student.service';
 import { MyValidators } from '../../shared/validators/validators';
+import { MessageUtils } from '../../utils/message-utils';
 
 @Component({
-  selector: 'app-correction',
-  templateUrl: './correction.component.html',
-  styleUrls: ['./correction.component.css']
+  selector: 'app-academic-secretary',
+  templateUrl: './academic-secretary.component.html',
+  styleUrls: ['./academic-secretary.component.css']
 })
-export class CorrectionComponent implements OnInit {
+export class AcademicSecretaryComponent implements OnInit {
 
   public form = new FormGroup({
     name: new FormControl(),
-    cpf: new FormControl(),
-    examFile: new FormControl()
+    cpf: new FormControl()
   });
 
   public canBlockUi = false;
@@ -27,7 +26,7 @@ export class CorrectionComponent implements OnInit {
     private fb: FormBuilder,
     private studentService: StudentService,
     private messageService: MessageService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.setTabMenuItems();
@@ -35,17 +34,14 @@ export class CorrectionComponent implements OnInit {
   }
 
   private setTabMenuItems(): void {
-    this.tabItems = this.menuUtils.vestibularSupportTabItems;
+    this.tabItems = this.menuUtils.secretaryTabItems;
   }
 
   private formBuilder(): void {
     this.form = this.fb.group({
       name: [null, Validators.required],
       cpf: [null, [Validators.required, MyValidators.validateCpf]],
-      examFile: [null, Validators.required]
     });
-
-    this.form.get('examFile')?.disable();
   }
 
   public getStudentInfo(cpf: string): void {
@@ -64,9 +60,5 @@ export class CorrectionComponent implements OnInit {
         this.canBlockUi = false;
       });
     }
-  }
-
-  public afterSelectFile(event: any): void {
-    this.form.get('examFile')?.setValue(event.currentFiles[0].name);
   }
 }
