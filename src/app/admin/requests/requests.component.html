@@ -1,0 +1,53 @@
+<div class="container flex-column">
+  <main class="content-wrapper flex-column">
+    <p-tabMenu
+      class="tab-menu-top"
+      [model]="tabItems"
+      [activeItem]="tabItems[1]">
+    </p-tabMenu>
+
+    <div class="requests-container">
+      <p-accordion [multiple]="true">
+        <p-accordionTab *ngFor="let employee of requestPending; let i = index">
+          <ng-template pTemplate="header">
+            <div class="accordion-header">
+              <p>
+                <span>nome: <strong>{{employee.name}}</strong></span>
+                <span>cpf: <strong>{{employee.cpf | cpfMask }}</strong></span>
+              </p>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <div class="accordion-content">
+              <p>
+                <span>e-mail: <strong>{{employee.email}}</strong></span>
+                <span>setor: <strong>{{employee.role | i18n}}</strong></span>
+                <span>status: <strong>pendente</strong></span>
+                <p-splitButton
+                  [label]="'ativar' | uppercase"
+                  [model]="actionItems"
+                  (onClick)="confirm(employee, true)"
+                  (onDropdownClick)="setButtonActions(employee)"
+                  styleClass="splitbutton-default">
+                </p-splitButton>
+              </p>
+            </div>
+          </ng-template>
+        </p-accordionTab>
+
+        <p-confirmDialog
+          [header]="'confirmar' | uppercase"
+          icon="pi pi-exclamation-triangle">
+        </p-confirmDialog>
+      </p-accordion>
+    </div>
+  </main>
+</div>
+
+<p-toast position="top-center"></p-toast>
+
+<p-blockUI
+  [baseZIndex]="999"
+  [blocked]="canBlockUi">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>

@@ -1,0 +1,64 @@
+<div class="container flex-column">
+  <main class="content-wrapper">
+    <p-tabMenu
+      class="tab-menu-top"
+      [model]="tabItems"
+      [activeItem]="tabItems[0]">
+    </p-tabMenu>
+
+    <form [formGroup]="form" class="flex-column">
+      <div class="form-field">
+        <label>{{ 'nome' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          [placeholder]="'joão da silva' | uppercase"
+          formControlName="name"
+        >
+      </div>
+
+      <div class="form-field">
+        <label>{{ 'cpf' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          placeholder="000.000.000-00"
+          formControlName="cpf"
+        >
+      </div>
+
+      <div class="form-field">
+        <label>{{ 'e-mail' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          [placeholder]="'joao.silva@email.com.br' | uppercase"
+          formControlName="email"
+        >
+      </div>
+
+      <div class="form-field">
+        <label>{{ 'setor' | uppercase }}</label>
+        <p-dropdown
+          [options]="roles"
+          optionLabel="label"
+          optionValue="value"
+          formControlName="role"
+          [placeholder]="'apoio vestibular' | uppercase"
+          [ngStyle]="{width: '100%'}"
+          styleClass="dropdown-default">
+        </p-dropdown>
+      </div>
+
+      <button
+        pButton
+        (click)="registration()"
+        [label]="'cadastrar' | uppercase"
+        type="button"
+        class="p-button-help p-button-lg">
+      </button>
+    </form>
+  </main>
+</div>
+
+<p-toast position="top-center"></p-toast>

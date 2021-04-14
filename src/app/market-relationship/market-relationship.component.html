@@ -1,0 +1,74 @@
+<div class="container flex-column">
+  <main class="content-wrapper">
+    <div class="form-container">
+     <h1>{{ 'inserir dados do aluno' | uppercase }}</h1>
+
+     <form [formGroup]="form" class="flex-column">
+       <div class="form-field">
+         <label>{{ 'cpf' | uppercase }}</label>
+         <input
+          pInputText
+          type="text"
+          placeholder="000.000.000-00"
+          formControlName="cpf"
+         >
+         <button
+          *ngIf="canShowSearchStudentButton"
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-search"
+          class="p-button-rounded p-button-help p-button-lg p-button-text"
+          (click)="searchStudent(form.get('cpf')?.value)">
+        </button>
+
+        <button
+          *ngIf="canShowNewStudentSearchButton"
+          (click)="newStudentSearch()"
+          class="btn-link">
+          {{'nova consulta' | uppercase}}
+        </button>
+       </div>
+
+      <div *ngIf="showInput" class="form-field">
+        <label>{{ 'nome' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          [placeholder]="'joão da silva' | uppercase"
+          formControlName="name"
+        >
+      </div>
+
+      <div *ngIf="showInput" class="form-field">
+        <label>{{ 'e-mail' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          [placeholder]="'joao.silva@email.com.br' | uppercase"
+          formControlName="email"
+        >
+      </div>
+
+      <div *ngIf="showInput" class="form-field">
+        <label>{{ 'telefone' | uppercase }}</label>
+        <input
+          pInputText
+          type="text"
+          placeholder="41 99123-8877"
+          formControlName="phone"
+        >
+      </div>
+
+      <button
+        *ngIf="canShowCreateStudentButton"
+        pButton
+        (click)="create()"
+        [label]="'inserir' | uppercase"
+        type="button"
+        class="p-button-help p-button-md insert-button hidden">
+      </button>
+     </form>
+    </div>
+  </main>
+</div>

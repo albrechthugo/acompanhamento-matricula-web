@@ -1,0 +1,17 @@
+<div class="container flex-column">
+  <main class="content-wrapper flex-column">
+    <h1 class="page-title">
+      {{'status de matrículas' | uppercase}}
+    </h1>
+
+    <i class="pi pi-download"></i>
+
+    <div class="chart-container">
+      <po-chart
+        [p-series]="chartData"
+        [p-categories]="chartCategories"
+        [p-type]="chartType">
+      </po-chart>
+    </div>
+  </main>
+</div>

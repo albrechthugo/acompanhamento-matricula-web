@@ -1,1 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root {
+  /* COLORS */
+
+  --white: #FFF;
+  --red: #FF0000;
+  --purple: #8E1291;
+  --orange: #FF641A;
+  --pink: #F60071;
+  --gray: #CCC;
+  --black: #000;
+
+  /* FONT WEIGHT */
+
+  --extraLight: 100;
+  --light: 300;
+  --regular: 400;
+  --medium: 500;
+  --bold: 700;
+  --extraBold: 900;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*,
+button,
+input {
+  font-family: 'Roboto', sans-serif;
+  font-weight: var(--bold);
+  border: 0;
+  outline: 0;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--white);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.btn-link {
+  background-color: transparent;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--pink);
+}
+
+#hidden {
+  display: none;
+}
+
+.p-inputtext {
+  width: 100%;
+  max-width: 380px;
+  height: 60px;
+}
+
+.p-dropdown {
+  width: 100%;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 460px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 460px) {
+  :root {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,19 @@
+<p-menu
+  *ngIf="canShowSideMenu"
+  [model]="menuItems"
+  styleClass="menu-default">
+</p-menu>
+<button
+  type="button"
+  pButton
+  icon="pi pi-bars"
+  [label]="'menu' | uppercase"
+  (click)="menu.toggle($event)"
+  class="popup-menu">
+</button>
+<p-menu
+  #menu
+  styleClass="popup-menu"
+  [popup]="true"
+  [model]="menuItems">
+</p-menu>

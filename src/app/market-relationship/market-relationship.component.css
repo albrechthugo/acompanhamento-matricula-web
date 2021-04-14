@@ -1,0 +1,117 @@
+.container {
+  overflow: hidden;
+}
+
+.content-wrapper {
+  padding-top: 85px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container {
+  width: 100%;
+  height: 100%;
+  padding-left: 250px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container h1 {
+  position: absolute;
+  top: 1rem;
+  left: 290px;
+  color: var(--purple);
+}
+
+.form-container form {
+  width: 700px;
+  align-items: center;
+}
+
+.form-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+.form-field .p-inputtext {
+  max-width: 100%;
+}
+
+.p-inputtext {
+  padding-left: 30px;
+  margin-bottom: 15px;
+}
+
+.form-field label {
+  color: var(--purple);
+  margin-bottom: 10px;
+  display: flex;
+  align-self: flex-start;
+}
+
+.form-field button:first-of-type {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+}
+
+.btn-link {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.insert-button {
+  margin-top: 10px;
+  display: flex;
+  align-self: flex-end;
+  width: 120px;
+  height: 45px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1080px) {
+  .form-container {
+    padding: 0;
+    flex-direction: column;
+  }
+
+  .form-container h1 {
+    left: unset;
+  }
+
+  .form-container form {
+    padding: 0 10px;
+  }
+
+  .form-field {
+    width: 60%;
+  }
+}
+
+@media (max-width: 460px) {
+  .form-field {
+    width: 50%;
+  }
+}
+
+@media (max-width: 360px) {
+  .form-field {
+    width: 40%;
+  }
+}
