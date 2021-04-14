@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /*overflow-y: auto;*/
+  overflow-x: hidden;
 }
 
 .page-title, .pi-download {
@@ -37,11 +37,7 @@
 }
 
 .chart-container {
-  width: 50%;
-}
-
-.status-container {
-  width: 100%;
+  width: 90%;
 }
 
 @media (max-width: 1080px) {

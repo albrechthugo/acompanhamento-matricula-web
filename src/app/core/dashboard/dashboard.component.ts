@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PoChartOptions, PoChartSerie, PoChartType } from '@po-ui/ng-components';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,24 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  public chartData: any;
+  public chartCategories: string[] = [];
+  public chartType = PoChartType.Bar;
+  public chartData: PoChartSerie[] = [];
+  public chartOptions: PoChartOptions = {};
 
   constructor() { }
 
   ngOnInit(): void {
-    this.setChartData();
+    this.setChartConfig();
   }
 
-  private setChartData(): void {
-    this.chartData = {
-      labels: ['MATRICULADOS', 'PENDENTES', 'DESISTENCIAS'],
-      datasets: [
-        {
-          label: 'Oi',
-          backgroundColor: '#f22',
-          data: [56, 5, 30]
-        },
-      ]
+  private setChartConfig(): void {
+    this.chartCategories = ['MATRICULADOS', 'PENDENTES', 'DESISTÊNCIAS'];
+    this.chartData = [
+      { data: [90], type: PoChartType.Column, color: '#8E1291' },
+      { data: [50], type: PoChartType.Column, color: '#FF641A' },
+      { data: [10], type: PoChartType.Column, color: '#FF0000' },
+    ];
+    this.chartOptions = {
+      axis: {
+        minRange: 0,
+        maxRange: 1000,
+      }
     };
   }
 }
