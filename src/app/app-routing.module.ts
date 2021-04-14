@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./secretary/secretary.module').then(m => m.SecretaryModule)
   },
   {
+    path: 'financeiro',
+    loadChildren: () => import('./financial/financial.module').then(m => m.FinancialModule)
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
