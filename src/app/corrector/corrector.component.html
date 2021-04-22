@@ -1,0 +1,88 @@
+<div class="container flex-column">
+  <main class="content-wrapper flex-column">
+    <h1 class="page-title">
+      {{'correção prova vestibular' | uppercase}}
+    </h1>
+
+    <i class="pi pi-download"></i>
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <form [formGroup]="studentBaseform.form" class="form-container p-grid p-ai-start vertical-container">
+          <div class="form-field p-xl-3 p-lg-3 p-md-4 p-sm-12 cpf-input">
+            <label>{{ 'cpf' | uppercase }}</label>
+            <input
+              pInputText
+              type="text"
+              placeholder="000.000.000-00"
+              formControlName="cpf"
+            >
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-search"
+              class="p-button-rounded p-button-help p-button-lg p-button-text"
+              (click)="getStudentInfo(studentBaseform.cpf?.value)">
+            </button>
+          </div>
+
+          <div class="form-field p-xl-9 p-lg-9 p-md-8 p-sm-12">
+            <label>{{ 'nome' | uppercase }}</label>
+            <input
+              pInputText
+              type="text"
+              [placeholder]="'joão da silva' | uppercase"
+              formControlName="name"
+            >
+          </div>
+        </form>
+      </div>
+
+      <div class="p-col-12">
+        <section class="fields-container">
+          <div *ngFor="let criteria of criterias" class="criteria-field">
+            <span>{{criteria.label}}</span>
+            <input
+              class="note-input"
+              type="number"
+              step="0.1"
+              value="0.0"
+            >
+          </div>
+        </section>
+      </div>
+
+      <div class="p-col-12">
+        <section class="fields-container">
+          <div class="criteria-field result">
+            <span>{{'aprovado' | uppercase}}</span>
+            <input
+              class="note-input"
+              disabled
+              type="number"
+              value="7.0"
+            >
+          </div>
+        </section>
+      </div>
+
+      <div class="p-col-12 p-d-flex p-pr-xl-6 p-pr-lg-6 p-jc-xl-end p-jc-lg-end centraliza">
+        <button
+          type="button"
+          pButton
+          pRipple
+          class="p-button-lg"
+          [label]="'finalizar' | uppercase">
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<p-blockUI [blocked]="canBlockUi">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
+
+<p-toast position="top-center">
+</p-toast>
