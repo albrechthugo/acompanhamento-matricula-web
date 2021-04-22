@@ -24,7 +24,7 @@ export class MenuUtils {
     { label: 'FINANCEIRO', icon: PrimeIcons.DOLLAR, routerLink: '/financeiro' },
     { label: 'APOIO VESTIBULAR', icon: PrimeIcons.PENCIL, routerLink: '/apoioVestibular' },
     { label: 'SECRETARIA', icon: PrimeIcons.FOLDER, routerLink: '/secretaria' },
-    { label: 'CORRETOR', icon: PrimeIcons.CHECK_CIRCLE, routerLink: '/corretor' },
+    { label: 'CORRETOR', icon: PrimeIcons.CHECK_CIRCLE, routerLink: '/correcaoProva' },
     { label: 'RELATÓRIO', icon: PrimeIcons.CHART_BAR, routerLink: '/relatorioMatriculas' },
     { label: 'CADASTRO', icon: PrimeIcons.DESKTOP, routerLink: '/admin' }
   ];

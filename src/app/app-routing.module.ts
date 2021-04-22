@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./financial/financial.module').then(m => m.FinancialModule)
   },
   {
+    path: 'correcaoProva',
+    loadChildren: () => import('./corrector/corrector.module').then(m => m.CorrectorModule)
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
