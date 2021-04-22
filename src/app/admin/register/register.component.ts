@@ -1,3 +1,4 @@
+import { EmployeeForm } from './../../shared/forms/employee/employee.form';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { MenuUtils } from '../../utils/menu-utils';
@@ -18,20 +19,14 @@ export class RegisterComponent implements OnInit {
 
   get employee(): EmployeeDto {
     return {
-      name: this.form.get('name')?.value,
-      cpf: this.form.get('cpf')?.value,
-      email: this.form.get('email')?.value,
-      role: this.form.get('role')?.value
+      name: this.employeeForm.name?.value,
+      cpf: this.employeeForm.cpf?.value,
+      email: this.employeeForm.email?.value,
+      role: this.employeeForm.role?.value,
     };
   }
 
-  public form = new FormGroup({
-    name: new FormControl(),
-    cpf: new FormControl(),
-    email: new FormControl(),
-    role: new FormControl()
-  });
-
+  public employeeForm: EmployeeForm;
   public tabItems: MenuItem[] = [];
   public roles: any[] = [];
   private menuUtils = new MenuUtils();
@@ -41,21 +36,13 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private employeeService: EmployeeService,
     private router: Router,
-    private messageService: MessageService) { }
+    private messageService: MessageService) {
+      this.employeeForm = new EmployeeForm(this.fb);
+    }
 
   ngOnInit(): void {
     this.setRoles();
     this.setTabItems();
-    this.formBuilder();
-  }
-
-  private formBuilder(): void {
-    this.form = this.fb.group({
-      name: [null, Validators.required],
-      cpf: [null, [Validators.required, MyValidators.validateCpf]],
-      email: [null, [Validators.required, Validators.email]],
-      role: [null, Validators.required]
-    });
   }
 
   private setTabItems(): void {
@@ -67,7 +54,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public registration(): void {
-    if (this.form.valid) {
+    if (this.employeeForm.form.valid) {
       this.employeeService.create(this.employee)
         .subscribe(() => {
           this.messageService.add(MessageUtils.EmployeeSuccessRegistration());

@@ -6,7 +6,7 @@
 
     <div class="p-grid">
       <div class="p-col-12">
-        <form [formGroup]="form" class="form-container p-grid p-ai-start vertical-container">
+        <form [formGroup]="studentBaseForm.form" class="form-container p-grid p-ai-start vertical-container">
           <div class="form-field p-xl-3 p-lg-3 p-md-4 p-sm-12 cpf-input">
             <label>{{ 'cpf' | uppercase }}</label>
             <input
@@ -21,7 +21,7 @@
               type="button"
               icon="pi pi-search"
               class="p-button-rounded p-button-help p-button-lg p-button-text"
-              (click)="getStudentInfo(form.get('cpf')?.value)">
+              (click)="getStudentInfo(studentBaseForm.cpf?.value)">
             </button>
           </div>
 

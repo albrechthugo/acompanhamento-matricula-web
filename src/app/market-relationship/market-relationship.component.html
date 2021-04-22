@@ -3,7 +3,7 @@
     <div class="form-container">
      <h1>{{ 'inserir dados do aluno' | uppercase }}</h1>
 
-     <form [formGroup]="form" class="flex-column">
+     <form [formGroup]="studentForm.form" class="flex-column">
        <div class="form-field">
          <label>{{ 'cpf' | uppercase }}</label>
          <input
@@ -19,7 +19,7 @@
           type="button"
           icon="pi pi-search"
           class="p-button-rounded p-button-help p-button-lg p-button-text"
-          (click)="searchStudent(form.get('cpf')?.value)">
+          (click)="searchStudent(studentForm.cpf?.value)">
         </button>
 
         <button
