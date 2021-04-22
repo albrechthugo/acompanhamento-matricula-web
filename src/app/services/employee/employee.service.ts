@@ -25,10 +25,10 @@ export class EmployeeService {
   }
 
   delete(employee: EmployeeDto): Observable<EmployeeDto> {
-    return this.http.delete<EmployeeDto>(`${this.baseUrl}/employees/?cpf=${employee.cpf}`);
+    return this.http.delete<EmployeeDto>(`${this.baseUrl}/employees/${employee.cpf}`);
   }
 
   getAllPendingActivation(): Observable<EmployeeDto[]> {
-    return this.http.get<EmployeeDto[]>(`${this.baseUrl}/employees/pending`);
+    return this.http.get<EmployeeDto[]>(`${this.baseUrl}/employees`);
   }
 }

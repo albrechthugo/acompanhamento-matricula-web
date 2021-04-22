@@ -20,6 +20,6 @@ export class StudentService {
   }
 
   getById(cpf: string): Observable<StudentDto> {
-    return this.http.get<StudentDto>(`${this.baseUrl}/students?cpf=${cpf}`);
+    return this.http.get<StudentDto>(`${this.baseUrl}/students/${cpf}`);
   }
 }
