@@ -5,6 +5,7 @@ import { MenuUtils } from '../../utils/menu-utils';
 import { StudentService } from '../../services/student/student.service';
 import { MyValidators } from '../../shared/validators/validators';
 import { MessageUtils } from '../../utils/message-utils';
+import { Utils } from '../../utils/utils';
 
 @Component({
   selector: 'app-upload-docs',
@@ -38,6 +39,12 @@ export class UploadDocsComponent implements OnInit {
     this.formBuilder();
   }
 
+  public onCpfNewValue(cpf: string): void {
+    if (cpf.length === 11) {
+      this.form.get('cpf')?.setValue(Utils.formatCpf(cpf));
+    }
+  }
+
   private setTabMenuItems(): void {
     this.tabItems = this.menuUtils.secretaryTabItems;
   }
@@ -60,7 +67,7 @@ export class UploadDocsComponent implements OnInit {
     if (this.form.get('cpf')?.valid) {
       this.canBlockUi = true;
 
-      this.studentService.getById(cpf).subscribe(student => {
+      this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
         this.canBlockUi = false;
 
         this.form.get('cpf')?.setValue(student.cpf);

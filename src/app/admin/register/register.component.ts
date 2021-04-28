@@ -9,6 +9,7 @@ import { EmployeeDto } from '../../entities/employee/employee-dto';
 import { EmployeeService } from '../../services/employee/employee.service';
 import { Router } from '@angular/router';
 import { MessageUtils } from '../../utils/message-utils';
+import { Utils } from '../../utils/utils';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
   get employee(): EmployeeDto {
     return {
       name: this.employeeForm.name?.value,
-      cpf: this.employeeForm.cpf?.value,
+      cpf: Utils.noMaskCpf(this.employeeForm.cpf?.value),
       email: this.employeeForm.email?.value,
       role: this.employeeForm.role?.value,
     };
@@ -51,6 +52,12 @@ export class RegisterComponent implements OnInit {
 
   private setRoles(): void {
     this.roles = this.rolesutils.roles;
+  }
+
+  public onCpfNewValue(cpf: string): void {
+    if (cpf.length === 11) {
+      this.employeeForm.cpf?.setValue(Utils.formatCpf(cpf));
+    }
   }
 
   public registration(): void {

@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { StudentService } from '../services/student/student.service';
 import { MessageUtils } from '../utils/message-utils';
 import { StudentBaseForm } from './../shared/forms/student/student-base.form';
+import { Utils } from '../utils/utils';
 
 @Component({
   selector: 'app-financial',
@@ -24,11 +25,17 @@ export class FinancialComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public onCpfNewValue(cpf: string): void {
+    if (cpf.length === 11) {
+      this.studentBaseForm.cpf?.setValue(Utils.formatCpf(cpf));
+    }
+  }
+
   public getStudentInfo(cpf: string): void {
     if (this.studentBaseForm.cpf?.valid) {
       this.canBlockUi = true;
 
-      this.studentService.getById(cpf).subscribe(student => {
+      this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
         this.canBlockUi = false;
         this.studentBaseForm.cpf?.setValue(student.cpf);
         this.studentBaseForm.cpf?.disable();

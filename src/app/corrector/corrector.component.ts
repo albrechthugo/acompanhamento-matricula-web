@@ -5,6 +5,7 @@ import { StudentService } from './../services/student/student.service';
 import { StudentBaseForm } from './../shared/forms/student/student-base.form';
 import { MessageUtils } from './../utils/message-utils';
 import { RatingCriteriaHelper } from './helpers/ rating-criteria';
+import { Utils } from '../utils/utils';
 
 @Component({
   selector: 'app-corrector',
@@ -26,11 +27,17 @@ export class CorrectorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public onCpfNewValue(cpf: string): void {
+    if (cpf.length === 11) {
+      this.studentBaseform.cpf?.setValue(Utils.formatCpf(cpf));
+    }
+  }
+
   public getStudentInfo(cpf: string): void {
     if (this.studentBaseform.cpf?.valid) {
       this.canBlockUi = true;
 
-      this.studentService.getById(cpf).subscribe(student => {
+      this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
         this.canBlockUi = false;
         this.studentBaseform.cpf?.setValue(student.cpf);
         this.studentBaseform.cpf?.disable();

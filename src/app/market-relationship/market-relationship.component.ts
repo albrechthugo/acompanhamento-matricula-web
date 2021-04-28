@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { StudentDto } from './../entities/student/student-dto';
 import { StudentService } from './../services/student/student.service';
 import { StudentForm } from './../shared/forms/student/student.form';
+import { Utils } from '../utils/utils';
 
 @Component({
   selector: 'app-market-relationship',
@@ -14,14 +15,13 @@ export class MarketRelationshipComponent implements OnInit {
   get student(): StudentDto {
     return {
       name: this.studentForm.name?.value,
-      cpf: this.studentForm.cpf?.value,
+      cpf: Utils.noMaskCpf(this.studentForm.cpf?.value),
       email: this.studentForm.email?.value,
       phone: this.studentForm.phone?.value
     };
   }
 
   public studentForm: StudentForm;
-
   public canShowCreateStudentButton = false;
   public canShowSearchStudentButton = true;
   public canShowNewStudentSearchButton = false;
@@ -44,9 +44,15 @@ export class MarketRelationshipComponent implements OnInit {
 
   public searchStudent(cpf: string): void {
     if (cpf) {
-      this.studentService.getById(cpf).subscribe(student => {
+      this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
         this.showStudent(student);
       });
+    }
+  }
+
+  public onCpfNewValue(cpf: string): void {
+    if (cpf.length === 11) {
+      this.studentForm.cpf?.setValue(Utils.formatCpf(cpf));
     }
   }
 

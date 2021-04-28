@@ -4,6 +4,7 @@ import { EmployeeDto } from '../entities/employee/employee-dto';
 import { EmployeeService } from '../services/employee/employee.service';
 import { RolesUtils } from '../utils/roles-utils';
 import { EmployeeForm } from './../shared/forms/employee/employee.form';
+import { Utils } from '../utils/utils';
 
 @Component({
   selector: 'app-registration-request',
@@ -15,15 +16,14 @@ export class RegistrationRequestComponent implements OnInit {
   get employee(): EmployeeDto {
     return {
       name: this.employeeForm.name?.value,
-      cpf: this.employeeForm.cpf?.value,
+      cpf: Utils.noMaskCpf(this.employeeForm.cpf?.value),
       email: this.employeeForm.email?.value,
       role: this.employeeForm.role?.value
     };
   }
 
+  private rolesUtils = new RolesUtils();
   public employeeForm: EmployeeForm;
-
-  private rolesutils = new RolesUtils();
   public roles: any[] = [];
 
   constructor(private fb: FormBuilder, private employeeService: EmployeeService) {
@@ -34,8 +34,14 @@ export class RegistrationRequestComponent implements OnInit {
     this.setRoles();
   }
 
+  public onCpfNewValue(cpf: string): void {
+    if (cpf.length === 11) {
+      this.employeeForm.cpf?.setValue(Utils.formatCpf(cpf));
+    }
+  }
+
   private setRoles(): void {
-    this.roles = this.rolesutils.roles;
+    this.roles = this.rolesUtils.roles;
   }
 
   public registration(): void {

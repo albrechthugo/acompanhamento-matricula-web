@@ -11,6 +11,7 @@
           type="text"
           placeholder="000.000.000-00"
           formControlName="cpf"
+          (ngModelChange)="onCpfNewValue($event)"
          >
          <button
           *ngIf="canShowSearchStudentButton"
