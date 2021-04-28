@@ -1,0 +1,41 @@
+<div class="container flex-column">
+  <main class="content-wrapper">
+    <h1>
+      {{'relatório de matrículas' | uppercase}}
+    </h1>
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <form [formGroup]="form" class="form-container p-grid p-ai-start vertical-container p-jc-center">
+          <div class="form-field p-xl-3 p-lg-3 p-md-4 p-sm-12 data-input">
+            <label>{{ 'data inicial' | uppercase }}</label>
+            <input
+              pInputText
+              type="date"
+              formControlName="startDate"
+            >
+          </div>
+
+          <div class="form-field p-xl-3 p-lg-3 p-md-4 p-sm-12 data-input">
+            <label>{{ 'data final ' | uppercase }}</label>
+            <input
+              pInputText
+              type="date"
+              formControlName="endDate"
+            >
+          </div>
+        </form>
+      </div>
+
+      <div class="p-col-12">
+        <section class="actions-container">
+          <app-widget
+            icon="pi pi-download"
+            label="download relatório"
+            (click)="downloadFile()">
+          </app-widget>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
