@@ -90,4 +90,20 @@ export class MessageUtils {
       detail: 'Solicitação de cadastro enviada!'
     };
   }
+
+  public static StudentRegistrationSuccess(): Message {
+    return {
+      severity: MessagesEnum.SUCCESS,
+      summary: 'Sucesso!',
+      detail: 'Estudante criado!'
+    };
+  }
+
+  public static StudentRegistrationError(): Message {
+    return {
+      severity: MessagesEnum.ERROR,
+      summary: 'Erro!',
+      detail: 'Falha ao criar estudante'
+    };
+  }
 }

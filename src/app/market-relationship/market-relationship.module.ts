@@ -7,6 +7,10 @@ import { MenuModule } from 'primeng/menu';
 import { RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { BlockUIModule } from 'primeng/blockui';
+import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { ButtonModule } from 'primeng/button';
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    ButtonModule
-  ]
+    ButtonModule,
+    ToastModule,
+    BlockUIModule,
+    ProgressSpinnerModule
+  ],
+  providers: [MessageService]
 })
 export class MarketRelationshipModule { }

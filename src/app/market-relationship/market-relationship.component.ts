@@ -4,6 +4,8 @@ import { StudentDto } from './../entities/student/student-dto';
 import { StudentService } from './../services/student/student.service';
 import { StudentForm } from './../shared/forms/student/student.form';
 import { Utils } from '../utils/utils';
+import { MessageService } from 'primeng/api';
+import { MessageUtils } from '../utils/message-utils';
 
 @Component({
   selector: 'app-market-relationship',
@@ -25,9 +27,12 @@ export class MarketRelationshipComponent implements OnInit {
   public canShowCreateStudentButton = false;
   public canShowSearchStudentButton = true;
   public canShowNewStudentSearchButton = false;
+  public canBlockUi = false;
   public showInput = false;
 
-  constructor(private fb: FormBuilder, private studentService: StudentService) {
+  constructor(private fb: FormBuilder,
+              private studentService: StudentService,
+              private messageService: MessageService) {
     this.studentForm = new StudentForm(this.fb);
   }
 
@@ -36,16 +41,37 @@ export class MarketRelationshipComponent implements OnInit {
 
   public create(): void {
     if (this.studentForm.form.valid) {
+      this.canBlockUi = true;
+
       this.studentService.create(this.student).subscribe(() => {
-        console.log(this.student, 'Student created');
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.StudentRegistrationSuccess());
+        this.resetFormAndRemoveInputs();
+      }, () => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.StudentRegistrationError());
       });
     }
   }
 
+  private resetFormAndRemoveInputs(): void {
+    this.studentForm.form.reset();
+    this.showInput = false;
+    this.canShowSearchStudentButton = true;
+    this.canShowNewStudentSearchButton = false;
+    this.canShowCreateStudentButton = false;
+  }
+
   public searchStudent(cpf: string): void {
     if (cpf) {
+      this.canBlockUi = true;
+
       this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
+        this.canBlockUi = false;
         this.showStudent(student);
+      }, () => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.GetInfoError());
       });
     }
   }
