@@ -6,6 +6,7 @@ import { StudentService } from '../../services/student/student.service';
 import { MyValidators } from '../../shared/validators/validators';
 import { MessageUtils } from '../../utils/message-utils';
 import { Utils } from '../../utils/utils';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-upload-docs',
@@ -27,16 +28,24 @@ export class UploadDocsComponent implements OnInit {
   public canBlockUi = false;
   public tabItems: MenuItem[] = [];
   private menuUtils = new MenuUtils();
+  private cpfParam = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private studentService: StudentService,
-    private messageService: MessageService
+  constructor(private fb: FormBuilder,
+              private studentService: StudentService,
+              private messageService: MessageService,
+              private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.getParamsFromUrl();
     this.setTabMenuItems();
     this.formBuilder();
+  }
+
+  private getParamsFromUrl(): void {
+    this.route.params.subscribe(params =>
+      this.cpfParam = params.cpf
+    );
   }
 
   public onCpfNewValue(cpf: string): void {
