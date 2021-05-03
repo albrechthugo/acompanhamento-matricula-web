@@ -18,6 +18,16 @@ export class MenuUtils {
     return this._secretaryTabItems;
   }
 
+  get canDisableUploadRoute(): boolean {
+    return this._disableUploadRoute;
+  }
+
+  set canDisableUploadRoute(value) {
+    this._disableUploadRoute = value;
+  }
+
+  private _disableUploadRoute = true;
+
   private _menuItems: MenuItem[] = [
     { label: 'INÍCIO', icon: PrimeIcons.HOME, routerLink: '/dashboard' },
     { label: 'RELAÇÃO MERCADO', icon: PrimeIcons.GLOBE, routerLink: '/relacaoMercado' },
@@ -40,7 +50,15 @@ export class MenuUtils {
   ];
 
   private _secretaryTabItems: MenuItem[] = [
-    { label: 'SECRETARIA', icon: PrimeIcons.BOOK, routerLink: '/secretaria/' },
-    { label: 'DOCUMENTOS', icon: PrimeIcons.CLOUD_UPLOAD, routerLink: '/secretaria/uploadDocumentos' }
+    {
+      label: 'SECRETARIA',
+      icon: PrimeIcons.BOOK,
+      routerLink: '/secretaria/'
+    },
+    {
+      label: 'DOCUMENTOS',
+      icon: PrimeIcons.CLOUD_UPLOAD, routerLink: '/secretaria/uploadDocumentos/',
+      disabled: this.canDisableUploadRoute
+    }
   ];
 }

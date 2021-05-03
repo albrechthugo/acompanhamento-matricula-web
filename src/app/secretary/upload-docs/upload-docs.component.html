@@ -11,35 +11,6 @@
     </h1>
 
     <form [formGroup]="form" class="form-container p-grid p-ai-start vertical-container">
-      <div class="form-field p-xl-3 p-lg-3 p-md-4 p-sm-12 cpf-input">
-        <label>{{ 'cpf' | uppercase }}</label>
-        <input
-          pInputText
-          type="text"
-          placeholder="000.000.000-00"
-          formControlName="cpf"
-          (ngModelChange)="onCpfNewValue($event)"
-        >
-        <button
-          pButton
-          pRipple
-          type="button"
-          icon="pi pi-search"
-          class="p-button-rounded p-button-help p-button-lg p-button-text"
-          (click)="getStudentInfo(form.get('cpf')?.value)">
-        </button>
-      </div>
-
-      <div class="form-field p-xl-9 p-lg-9 p-md-8 p-sm-12">
-        <label>{{ 'nome' | uppercase }}</label>
-        <input
-          pInputText
-          type="text"
-          [placeholder]="'joão da silva' | uppercase"
-          formControlName="name"
-        >
-      </div>
-
       <div class="form-field p-col-12 upload-input">
         <label>{{ 'documento identificação' | uppercase }}</label>
         <input

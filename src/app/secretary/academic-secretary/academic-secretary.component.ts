@@ -6,6 +6,7 @@ import { MenuUtils } from '../../utils/menu-utils';
 import { MessageUtils } from '../../utils/message-utils';
 import { StudentBaseForm } from './../../shared/forms/student/student-base.form';
 import { Utils } from '../../utils/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-academic-secretary',
@@ -17,12 +18,13 @@ export class AcademicSecretaryComponent implements OnInit {
   public studentBaseForm: StudentBaseForm;
   public canBlockUi = false;
   public tabItems: MenuItem[] = [];
+  public canDisableActions = true;
   private menuUtils = new MenuUtils();
 
-  constructor(
-    private fb: FormBuilder,
-    private studentService: StudentService,
-    private messageService: MessageService
+  constructor(private fb: FormBuilder,
+              private studentService: StudentService,
+              private messageService: MessageService,
+              private router: Router
   ) { this.studentBaseForm = new StudentBaseForm(this.fb); }
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class AcademicSecretaryComponent implements OnInit {
 
       this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
         this.canBlockUi = false;
-
+        this.canDisableActions = false;
         this.studentBaseForm.cpf?.setValue(student.cpf);
         this.studentBaseForm.cpf?.disable();
         this.studentBaseForm.name?.setValue(student.name);
@@ -54,6 +56,13 @@ export class AcademicSecretaryComponent implements OnInit {
         this.messageService.add(MessageUtils.GetInfoError());
         this.canBlockUi = false;
       });
+    }
+  }
+
+  public navigateToUpload(cpf: string): void {
+    if (!this.canDisableActions) {
+      const noMaskCpf = Utils.noMaskCpf(cpf);
+      this.router.navigateByUrl(`/secretaria/uploadDocumentos/${noMaskCpf}`);
     }
   }
 }
