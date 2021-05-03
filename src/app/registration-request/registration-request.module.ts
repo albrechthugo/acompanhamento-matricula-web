@@ -8,6 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveFormsModule,
     RouterModule,
     DropdownModule,
-    InputTextModule
-  ]
+    InputTextModule,
+    BlockUIModule,
+    ProgressSpinnerModule,
+    ToastModule
+  ],
+  providers: [MessageService]
 })
 export class RegistrationRequestModule { }

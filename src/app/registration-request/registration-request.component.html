@@ -40,7 +40,7 @@
           optionValue="value"
           formControlName="role"
           [placeholder]="'apoio vestibular' | uppercase"
-          [ngStyle]="{width: '100%'}"
+          [ngStyle]="{ width: '100%' }"
           styleClass="dropdown-default">
         </p-dropdown>
       </div>
@@ -55,3 +55,10 @@
     </form>
   </main>
 </div>
+
+<p-blockUI [blocked]="canBlockUi">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
+
+<p-toast position="top-center">
+</p-toast>

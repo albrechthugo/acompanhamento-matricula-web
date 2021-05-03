@@ -74,4 +74,20 @@ export class MessageUtils {
       detail: 'Falha ao buscar dados'
     };
   }
+
+  public static RegistrationRequestError(): Message {
+    return {
+      severity: MessagesEnum.ERROR,
+      summary: 'Erro!',
+      detail: 'Falha na solicitação de cadastro'
+    };
+  }
+
+  public static RegistrationRequestSuccess(): Message {
+    return {
+      severity: MessagesEnum.SUCCESS,
+      summary: 'Sucesso!',
+      detail: 'Solicitação de cadastro enviada!'
+    };
+  }
 }

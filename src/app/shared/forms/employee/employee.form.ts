@@ -16,7 +16,7 @@ export class EmployeeForm {
   }
 
   public get role(): AbstractControl | null {
-    return this._form.get('phone');
+    return this._form.get('role');
   }
 
   public get form(): FormGroup {

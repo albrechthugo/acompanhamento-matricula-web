@@ -5,6 +5,9 @@ import { EmployeeService } from '../services/employee/employee.service';
 import { RolesUtils } from '../utils/roles-utils';
 import { EmployeeForm } from './../shared/forms/employee/employee.form';
 import { Utils } from '../utils/utils';
+import { MessageService } from 'primeng/api';
+import { MessageUtils } from '../utils/message-utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-request',
@@ -25,8 +28,12 @@ export class RegistrationRequestComponent implements OnInit {
   private rolesUtils = new RolesUtils();
   public employeeForm: EmployeeForm;
   public roles: any[] = [];
+  public canBlockUi = false;
 
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService) {
+  constructor(private fb: FormBuilder,
+              private employeeService: EmployeeService,
+              public messageService: MessageService,
+              private router: Router) {
     this.employeeForm = new EmployeeForm(this.fb);
   }
 
@@ -46,8 +53,18 @@ export class RegistrationRequestComponent implements OnInit {
 
   public registration(): void {
     if (this.employeeForm.form.valid) {
+      this.canBlockUi = true;
       this.employeeService.create(this.employee)
-        .subscribe(() => console.log(this.employee, 'Sucess employee registration!'));
+        .subscribe(() => {
+          this.canBlockUi = false;
+          this.messageService.add(MessageUtils.RegistrationRequestSuccess());
+          setTimeout(() => {
+            this.router.navigateByUrl('/');
+          }, 700);
+        }, () => {
+          this.canBlockUi = false;
+          this.messageService.add(MessageUtils.RegistrationRequestError());
+        });
     }
   }
 
