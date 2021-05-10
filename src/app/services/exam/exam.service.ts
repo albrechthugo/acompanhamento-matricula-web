@@ -17,7 +17,7 @@ export class ExamService {
   constructor(private http: HttpClient) { }
 
   create(exam: ExamDto): Observable<ExamDto> {
-    return this.http.get<ExamDto>(`${this.baseUrl}/exams`);
+    return this.http.post<ExamDto>(`${this.baseUrl}/exams`, exam);
   }
 
   getExamByStudent(student: StudentDto): Observable<StudentDto> {

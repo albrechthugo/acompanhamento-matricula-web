@@ -6,6 +6,7 @@ import { MenuUtils } from 'src/app/utils/menu-utils';
 import { Utils } from '../../utils/utils';
 import { MessageUtils } from '../../utils/message-utils';
 import { StudentService } from '../../services/student/student.service';
+import { ExamService } from '../../services/exam/exam.service';
 
 @Component({
   selector: 'app-exam',
@@ -22,6 +23,10 @@ export class ExamComponent implements OnInit {
     return this.form.get('name') as AbstractControl;
   }
 
+  public get urlInput(): AbstractControl {
+    return this.form.get('examUrl') as AbstractControl;
+  }
+
   public form = new FormGroup({
     name: new FormControl(),
     cpf: new FormControl(),
@@ -35,7 +40,8 @@ export class ExamComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private messageService: MessageService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private examService: ExamService
     ) { }
 
   ngOnInit(): void {
@@ -75,6 +81,17 @@ export class ExamComponent implements OnInit {
         this.messageService.add(MessageUtils.GetInfoError());
         this.canBlockUi = false;
       });
+    }
+  }
+
+  public sendFileUrl(): void {
+    const exam = {
+      cpf: Utils.noMaskCpf(this.cpfInput.value),
+      url: this.urlInput.value
+    };
+
+    if (this.form?.valid) {
+      this.examService.create(exam).subscribe(() => {});
     }
   }
 }
