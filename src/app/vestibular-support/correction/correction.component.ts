@@ -1,3 +1,5 @@
+import { environment } from './../../../environments/environment.prod';
+import { ExamService } from './../../services/exam/exam.service';
 import { MessageUtils } from './../../utils/message-utils';
 import { StudentService } from './../../services/student/student.service';
 import { Component, OnInit } from '@angular/core';
@@ -30,12 +32,14 @@ export class CorrectionComponent implements OnInit {
 
   public canBlockUi = false;
   public tabItems: MenuItem[] = [];
+  public fileUrl = '';
   private menuUtils = new MenuUtils();
 
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private examService: ExamService
     ) { }
 
   ngOnInit(): void {
@@ -82,6 +86,8 @@ export class CorrectionComponent implements OnInit {
   }
 
   public afterSelectFile(event: any): void {
-    this.form.get('examFile')?.setValue(event.currentFiles[0].name);
+    this.form.get('examFile')?.setValue(event.files[0].name);
+    this.examService.upload(event.files, Utils.noMaskCpf(this.cpfInput.value))
+      .subscribe(() => {});
   }
 }

@@ -53,10 +53,11 @@
           mode="basic"
           name="prova"
           [multiple]="false"
+          [customUpload]="true"
           icon="pi pi-upload"
           [showUploadButton]=false
           [maxFileSize]="50000"
-          (onSelect)="afterSelectFile($event)">
+          (uploadHandler)="afterSelectFile($event)">
         </p-fileUpload>
       </div>
 

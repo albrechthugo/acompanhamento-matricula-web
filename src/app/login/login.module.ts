@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
@@ -23,6 +24,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputTextModule,
     BlockUIModule,
     ProgressSpinnerModule
-  ]
+  ],
+  providers: [AuthService]
 })
 export class LoginModule { }

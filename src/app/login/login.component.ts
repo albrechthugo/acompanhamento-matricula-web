@@ -1,3 +1,5 @@
+import { UserDto } from './../entities/user/user-dto';
+import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  get user(): { email: string, password: string } {
+  get user(): UserDto {
     return {
-      email: this.userForm.get('email')?.value,
+      username: this.userForm.get('email')?.value,
       password: this.userForm.get('password')?.value
     };
   }
@@ -23,7 +25,9 @@ export class LoginComponent implements OnInit {
 
   public canBlockUi = false;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.formBuilder();
@@ -39,9 +43,10 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.userForm.valid) {
       this.canBlockUi = true;
-      setTimeout(() => {
+      this.authService.post(this.user).subscribe((response: Response) => {
+        console.log(response);
         this.router.navigateByUrl('/dashboard');
-      }, 3000);
+      });
     }
   }
 

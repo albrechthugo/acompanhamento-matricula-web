@@ -23,4 +23,13 @@ export class ExamService {
   getExamByStudent(student: StudentDto): Observable<StudentDto> {
     return this.http.get<StudentDto>(`${this.baseUrl}/exams/student/${student.cpf}`);
   }
+
+  upload(files: File[], cpf: string): Observable<any> {
+    const formData = new FormData();
+    files.forEach(file => {
+      formData.append('file', file);
+    });
+
+    return this.http.post(`${environment.API_URL}/exams/student/${cpf}`, formData);
+  }
 }
