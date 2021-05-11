@@ -106,4 +106,20 @@ export class MessageUtils {
       detail: 'Falha ao criar estudante'
     };
   }
+
+  public static GenericSuccess(): Message {
+    return {
+      severity: MessagesEnum.SUCCESS,
+      summary: 'Sucesso!',
+      detail: 'Sucesso'
+    };
+  }
+
+  public static GenericError(): Message {
+    return {
+      severity: MessagesEnum.ERROR,
+      summary: 'Erro',
+      detail: 'Tente novamente'
+    };
+  }
 }

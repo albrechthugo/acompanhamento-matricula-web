@@ -85,13 +85,22 @@ export class ExamComponent implements OnInit {
   }
 
   public sendFileUrl(): void {
+    this.canBlockUi = true;
+
     const exam = {
       cpf: Utils.noMaskCpf(this.cpfInput.value),
       url: this.urlInput.value
     };
 
     if (this.form?.valid) {
-      this.examService.create(exam).subscribe(() => {});
+      this.examService.create(exam).subscribe(() => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.GenericSuccess());
+        this.form.reset();
+      }, () => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.GenericError());
+      });
     }
   }
 }

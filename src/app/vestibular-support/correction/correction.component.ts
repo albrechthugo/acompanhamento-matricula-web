@@ -85,9 +85,22 @@ export class CorrectionComponent implements OnInit {
     }
   }
 
-  public afterSelectFile(event: any): void {
+  public upload(event: any): void {
+    this.canBlockUi = true;
+
     this.form.get('examFile')?.setValue(event.files[0].name);
     this.examService.upload(event.files, Utils.noMaskCpf(this.cpfInput.value))
-      .subscribe(() => {});
+      .subscribe(() => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.GenericSuccess());
+        this.form.reset();
+        this.cpfInput.enable();
+        this.nameInput.enable();
+      }, () => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.GenericError());
+        this.cpfInput.enable();
+        this.nameInput.enable();
+      });
   }
 }

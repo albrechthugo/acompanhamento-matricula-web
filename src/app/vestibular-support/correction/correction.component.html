@@ -57,17 +57,8 @@
           icon="pi pi-upload"
           [showUploadButton]=false
           [maxFileSize]="50000"
-          (uploadHandler)="afterSelectFile($event)">
+          (uploadHandler)="upload($event)">
         </p-fileUpload>
-      </div>
-
-      <div class="button-wrapper p-col-12">
-        <button
-          pButton
-          [label]="'enviar' | uppercase"
-          type="button"
-          class="p-button-help p-button-lg">
-        </button>
       </div>
     </form>
   </main>
