@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { EmployeeDto } from '../../entities/employee/employee-dto';
+import { DocumentEnum } from '../../entities/document/document-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,14 @@ export class EmployeeService {
 
   getAllPendingActivation(): Observable<EmployeeDto[]> {
     return this.http.get<EmployeeDto[]>(`${this.baseUrl}/employees`);
+  }
+
+  uploadDoc(docs: File[], docType: DocumentEnum, cpf: string): Observable<any> {
+    const formData = new FormData();
+    docs.forEach(doc => {
+      formData.append('file', doc, doc.name);
+    });
+
+    return this.http.post(`${this.baseUrl}/employees/document/${docType}/student/${cpf}`, formData);
   }
 }

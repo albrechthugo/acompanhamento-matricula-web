@@ -7,6 +7,8 @@ import { MyValidators } from '../../shared/validators/validators';
 import { MessageUtils } from '../../utils/message-utils';
 import { Utils } from '../../utils/utils';
 import { ActivatedRoute } from '@angular/router';
+import { EmployeeService } from '../../services/employee/employee.service';
+import { DocumentEnum } from '../../entities/document/document-enum';
 
 @Component({
   selector: 'app-upload-docs',
@@ -33,6 +35,7 @@ export class UploadDocsComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private studentService: StudentService,
               private messageService: MessageService,
+              private employeeService: EmployeeService,
               private route: ActivatedRoute
   ) { }
 
@@ -43,9 +46,9 @@ export class UploadDocsComponent implements OnInit {
   }
 
   private getParamsFromUrl(): void {
-    this.route.params.subscribe(params =>
-      this.cpfParam = params.cpf
-    );
+    this.route.params.subscribe(params => {
+      this.cpfParam = params['id'];
+    });
   }
 
   public onCpfNewValue(cpf: string): void {
@@ -60,8 +63,6 @@ export class UploadDocsComponent implements OnInit {
 
   private formBuilder(): void {
     this.form = this.fb.group({
-      name: [null, Validators.required],
-      cpf: [null, [Validators.required, MyValidators.validateCpf]],
       identityFile: [null, Validators.required],
       residencialFile: [null, Validators.required],
       schoolRecordFile: [null, Validators.required],
@@ -72,29 +73,28 @@ export class UploadDocsComponent implements OnInit {
     this.disableFileInputs();
   }
 
-  public getStudentInfo(cpf: string): void {
-    if (this.form.get('cpf')?.valid) {
-      this.canBlockUi = true;
-
-      this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
-        this.canBlockUi = false;
-
-        this.form.get('cpf')?.setValue(student.cpf);
-        this.form.get('cpf')?.disable();
-        this.form.get('name')?.setValue(student.name);
-        this.form.get('name')?.disable();
-      }, () => {
-        this.messageService.add(MessageUtils.GetInfoError());
-        this.canBlockUi = false;
-      });
-    }
-  }
-
   private disableFileInputs(): void {
     this.form.get('identityFile')?.disable();
     this.form.get('residencialFile')?.disable();
     this.form.get('schoolRecordFile')?.disable();
     this.form.get('voterRegistrationFile')?.disable();
     this.form.get('birthCertificateFile')?.disable();
+  }
+
+  public sendFile(event: any, docType: string | DocumentEnum): void {
+    this.canBlockUi = true;
+
+    this.employeeService.uploadDoc(
+      event.files,
+      docType as DocumentEnum,
+      this.cpfParam
+    ).subscribe(() => {
+      this.canBlockUi = false;
+      this.messageService.add(MessageUtils.GenericSuccess());
+      this.form.reset();
+    }, () => {
+      this.canBlockUi = false;
+      this.messageService.add(MessageUtils.GenericError());
+    });
   }
 }
