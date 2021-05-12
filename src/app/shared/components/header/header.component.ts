@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('headerUsername', { static: false }) headerUsername: ElementRef | any;
 
   private subscription = new Subscription();
+  public title = '';
 
   constructor(private router: Router) {}
 
@@ -21,7 +22,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription = this.router.events.pipe(
       filter((event: Event): event is NavigationStart => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
-        if (event.url === '/solicitarCadastro' || event.url === '/relatorioMatricula') {
+        if (event.url === '/solicitarCadastro' || event.url === '/relatorioMatriculas/data') {
+          this.title = event.url === '/solicitarCadastro' ? 'solicitar cadastro' : 'relatório de matrículas';
           this.headerTitle.nativeElement.id = '';
           this.headerUsername.nativeElement.id = 'hidden';
         } else {

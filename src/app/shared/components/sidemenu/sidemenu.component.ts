@@ -36,7 +36,7 @@ export class SidemenuComponent implements OnInit, OnDestroy {
     this.subscription = this.router.events.pipe(
       filter((event: Event): event is NavigationStart => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
-        if (event.url === '/solicitarCadastro' || event.url === '/relatorioMatricula' || event.url === '/') {
+        if (event.url === '/solicitarCadastro' || event.url === '/relatorioMatriculas/data' || event.url === '/') {
           this.canShowSideMenu = false;
         } else {
           this.canShowSideMenu = true;
