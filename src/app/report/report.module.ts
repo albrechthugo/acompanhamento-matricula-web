@@ -6,6 +6,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { WidgetModule } from '../shared/components/widget/widget.module';
+import { ReportPdfModule } from './report-pdf/report-pdf.module';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [ReportComponent],
@@ -16,7 +21,12 @@ import { WidgetModule } from '../shared/components/widget/widget.module';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    WidgetModule
-  ]
+    WidgetModule,
+    ReportPdfModule,
+    ToastModule,
+    BlockUIModule,
+    ProgressSpinnerModule
+  ],
+  providers: [MessageService]
 })
 export class ReportModule { }

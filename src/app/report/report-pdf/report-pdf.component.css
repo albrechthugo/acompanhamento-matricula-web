@@ -1,0 +1,88 @@
+.container {
+  overflow: hidden;
+}
+
+.content-wrapper {
+  padding-top: 85px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-container {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+}
+
+.data-container .data-input {
+  width: 250px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  background-color: var(--orange);
+  border-radius: 3px;
+}
+
+.data-container .data-input i {
+  color: var(--purple);
+  font-size: 1.8rem;
+}
+
+.data-container .data-input div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.data-container .data-input:first-child {
+  margin-right: 10px;
+}
+
+.data-container .data-input label, span {
+  color: var(--white);
+}
+
+.data-container .data-input label {
+  font-weight: 700;
+  color: var(--purple);
+}
+
+.data-container .data-input span {
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+.table-container {
+  width: 95%;
+  margin: 25px auto;
+}
+
+@media (max-width: 550px) {
+  .data-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
+  }
+
+  .data-container .data-input {
+    height: 90px;
+  }
+
+  .data-container .data-input:first-child {
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+}
