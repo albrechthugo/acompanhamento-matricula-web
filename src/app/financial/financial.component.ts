@@ -1,3 +1,4 @@
+import { DownloadService } from './../services/download.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -15,14 +16,15 @@ export class FinancialComponent implements OnInit {
 
   public studentBaseForm: StudentBaseForm;
   public canBlockUi = false;
+  public canDisableActions = true;
 
-  constructor(
-    private fb: FormBuilder,
-    private studentService: StudentService,
-    private messageService: MessageService
-  ) { this.studentBaseForm = new StudentBaseForm(this.fb); }
+  constructor(private fb: FormBuilder,
+              private studentService: StudentService,
+              private messageService: MessageService,
+              private downloadService: DownloadService) { this.studentBaseForm = new StudentBaseForm(this.fb); }
 
   ngOnInit(): void {
+    this.studentBaseForm.name?.disable();
   }
 
   public onCpfNewValue(cpf: string): void {
@@ -37,6 +39,7 @@ export class FinancialComponent implements OnInit {
 
       this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
         this.canBlockUi = false;
+        this.canDisableActions = false;
         this.studentBaseForm.cpf?.setValue(student.cpf);
         this.studentBaseForm.cpf?.disable();
         this.studentBaseForm.name?.setValue(student.name);

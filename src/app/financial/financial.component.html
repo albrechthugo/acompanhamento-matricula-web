@@ -42,12 +42,14 @@
         <section class="actions-container">
           <app-widget
             icon="pi pi-download"
-            label="download documentos">
+            label="download documentos"
+            [disableWidget]="canDisableActions">
           </app-widget>
 
           <app-widget
             icon="pi pi-download"
-            label="upload contrato">
+            label="upload contrato"
+            [disableWidget]="canDisableActions">
           </app-widget>
         </section>
       </div>
