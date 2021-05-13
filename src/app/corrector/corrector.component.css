@@ -70,7 +70,6 @@
 
 .fields-container {
   width: 100%;
-  padding: 0 40px;
 }
 
 .criteria-field {
@@ -113,11 +112,14 @@
 }
 
 .result {
+  margin-top: -5px;
   background-color: transparent;
   justify-content: flex-end;
+  padding-right: 0px;
 }
 
 .result span {
+  font-size: 1rem;
   margin-right: 10px;
   color: var(--blue);
 }
@@ -133,6 +135,19 @@
 .cpf-input button {
   right: 10px;
   top: 45%;
+}
+
+.concluir {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.concluir label {
+  margin-right: 10px;
+  font-size: 0.9rem;
+  color: var(--orange);
 }
 
 @media (max-width: 1080px) {

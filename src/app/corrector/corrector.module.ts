@@ -1,3 +1,4 @@
+import { GradeStatusPipeModule } from './../shared/pipes/grade-status/grade-status.pipe.module';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
@@ -11,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { InputSwitchModule } from 'primeng/inputswitch';
+
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ButtonModule,
     ConfirmDialogModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    InputSwitchModule,
+    GradeStatusPipeModule
   ],
   providers: [
     MessageService
