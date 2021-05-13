@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   public employeeForm: EmployeeForm;
   public tabItems: MenuItem[] = [];
   public roles: any[] = [];
+  public canBlockUi = false;
   private menuUtils = new MenuUtils();
   private rolesutils = new RolesUtils();
 
@@ -62,11 +63,14 @@ export class RegisterComponent implements OnInit {
 
   public registration(): void {
     if (this.employeeForm.form.valid) {
+      this.canBlockUi = true;
       this.employeeService.create(this.employee)
         .subscribe(() => {
+          this.canBlockUi = false;
           this.messageService.add(MessageUtils.EmployeeSuccessRegistration());
           setTimeout(() => this.router.navigateByUrl('/admin/solicitacoes'), 1000);
         }, () => {
+          this.canBlockUi = false;
           this.messageService.add(MessageUtils.EmployeeErrorRegistration());
         });
     }
