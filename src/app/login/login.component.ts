@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     if (this.userForm.valid) {
       this.canBlockUi = true;
       this.authService.post(this.user).subscribe((response: Response) => {
-        console.log(response);
+        this.canBlockUi = false;
         this.router.navigateByUrl('/dashboard');
       });
     }
