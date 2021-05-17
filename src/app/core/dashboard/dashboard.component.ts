@@ -1,3 +1,4 @@
+import { ReportService } from './../../services/report/report.service';
 import { Component, OnInit } from '@angular/core';
 import { PoChartOptions, PoChartSerie, PoChartType } from '@po-ui/ng-components';
 
@@ -13,10 +14,11 @@ export class DashboardComponent implements OnInit {
   public chartData: PoChartSerie[] = [];
   public chartOptions: PoChartOptions = {};
 
-  constructor() { }
+  constructor(private reportService: ReportService) { }
 
   ngOnInit(): void {
     this.setChartConfig();
+    this.getReportData();
   }
 
   private setChartConfig(): void {
@@ -32,5 +34,9 @@ export class DashboardComponent implements OnInit {
         maxRange: 1000,
       }
     };
+  }
+
+  private getReportData(): void {
+    this.reportService.getDashboardReport().subscribe(() => {});
   }
 }

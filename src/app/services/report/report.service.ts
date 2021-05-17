@@ -1,3 +1,4 @@
+import { DateUtils } from './../../utils/date-utils';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -20,5 +21,11 @@ export class ReportService {
 
   getReport(startDate: Date, endDate: Date): Observable<StudentReportDto[]> {
     return this.http.get<StudentReportDto[]>(`${this.baseUrl}/reports/student/?startDate=${startDate}&endDate=${endDate}`);
+  }
+
+  getDashboardReport(): Observable<StudentReportDto[]> {
+    const endDate = new Date();
+    const startDate = DateUtils.getOneMonthBack(endDate).toLocaleDateString();
+    return this.http.get<StudentReportDto[]>(`${this.baseUrl}/reports/student/?startDate=${startDate}&endDate=${endDate.toLocaleDateString()}`);
   }
 }
