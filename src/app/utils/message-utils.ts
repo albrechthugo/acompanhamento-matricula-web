@@ -122,4 +122,12 @@ export class MessageUtils {
       detail: 'Tente novamente'
     };
   }
+
+  public static LoginError(): Message {
+    return {
+      severity: MessagesEnum.ERROR,
+      summary: 'Erro',
+      detail: 'Usuário e/ou senha inválido'
+    };
+  }
 }

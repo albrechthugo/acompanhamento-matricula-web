@@ -1,3 +1,5 @@
+import { MessageUtils } from './../utils/message-utils';
+import { MessageService } from 'primeng/api';
 import { UserDto } from './../entities/user/user-dto';
 import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -7,7 +9,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
 
@@ -27,7 +30,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.formBuilder();
@@ -43,9 +47,12 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.userForm.valid) {
       this.canBlockUi = true;
-      this.authService.post(this.user).subscribe((response: Response) => {
+      this.authService.doLogin(this.user).subscribe(() => {
         this.canBlockUi = false;
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigate(['dashboard']);
+      }, () => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.LoginError());
       });
     }
   }
