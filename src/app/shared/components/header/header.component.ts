@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
   public title = '';
-  public name: string = '';
+  public name = '';
 
   constructor(private router: Router, private authService: AuthService) {}
 
