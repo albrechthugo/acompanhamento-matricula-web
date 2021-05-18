@@ -4,6 +4,8 @@ import { SidemenuComponent } from './sidemenu.component';
 import { RouterModule } from '@angular/router';
 import { MenuModule } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { ButtonModule } from 'primeng/button';
     CommonModule,
     RouterModule,
     MenuModule,
-    ButtonModule
+    ButtonModule,
+    BlockUIModule,
+    ProgressSpinnerModule
   ],
   exports: [
     SidemenuComponent
