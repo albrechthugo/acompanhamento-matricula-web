@@ -7,7 +7,6 @@ import { MenuModule } from 'primeng/menu';
 import { RouterModule } from '@angular/router';
 import {ChartModule} from 'primeng/chart';
 import { TableModule } from 'primeng/table';
-import { PoChartModule } from '@po-ui/ng-components';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,7 @@ import { PoChartModule } from '@po-ui/ng-components';
     RouterModule,
     ChartModule,
     TableModule,
-    PoChartModule
+    ChartModule
   ]
 })
 export class DashboardModule { }

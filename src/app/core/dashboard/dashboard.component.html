@@ -7,11 +7,10 @@
     <i class="pi pi-download"></i>
 
     <div class="chart-container">
-      <po-chart
-        [p-series]="chartData"
-        [p-categories]="chartCategories"
-        [p-type]="chartType">
-      </po-chart>
+      <p-chart
+        type="bar"
+        [data]="chartData">
+      </p-chart>
     </div>
   </main>
 </div>
