@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
         data: [
           this.completedStudents.length,
           this.pendingStudents.length,
-          this.completedStudents.length
+          this.canceledStudents.length
         ]
       }]
     };
