@@ -34,8 +34,12 @@ export class DashboardComponent implements OnInit {
     this.chartData = {
       labels: ['MATRICULADOS', 'PENDENTES', 'DESISTÊNCIAS'],
       datasets: [{
-        data: [30, 30, 40],
-        backgroundColor: ['#8E1291', '#FF641A', '#FF0000']
+        backgroundColor: ['#8E1291', '#FF641A', '#FF0000'],
+        data: [
+          this.completedStudents.length,
+          this.pendingStudents.length,
+          this.completedStudents.length
+        ]
       }]
     };
   }
