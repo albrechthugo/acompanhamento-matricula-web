@@ -12,5 +12,35 @@
         [data]="chartData">
       </p-chart>
     </div>
+
+    <div class="table-container">
+      <p-table [value]="students">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>{{'nome' | uppercase}}</th>
+            <th>{{'data vestibular' | uppercase}}</th>
+            <th>{{'último movimento' | uppercase}}</th>
+            <th>{{'setor' | uppercase}}</th>
+            <th>{{'status' | uppercase}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student>
+          <tr>
+            <td>{{student.name}}</td>
+            <td>{{student.cpf}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.phone}}</td>
+            <td>{{student.studentStatus | studentReportStatus}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </main>
 </div>
+
+<p-blockUI [blocked]="canBlockUi">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
+
+<p-toast position="top-center">
+</p-toast>

@@ -23,7 +23,7 @@ export class StudentService {
     return this.http.get<StudentDto>(`${this.baseUrl}/students/${cpf}`);
   }
 
-  getAll(): Observable<StudentDto> {
-    return this.http.get<StudentDto>(`${this.baseUrl}/students`);
+  getAll(): Observable<StudentDto[]> {
+    return this.http.get<StudentDto[]>(`${this.baseUrl}/students`);
   }
 }
