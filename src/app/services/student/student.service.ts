@@ -22,4 +22,8 @@ export class StudentService {
   getById(cpf: string): Observable<StudentDto> {
     return this.http.get<StudentDto>(`${this.baseUrl}/students/${cpf}`);
   }
+
+  getAll(): Observable<StudentDto> {
+    return this.http.get<StudentDto>(`${this.baseUrl}/students`);
+  }
 }

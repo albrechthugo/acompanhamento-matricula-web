@@ -10,6 +10,6 @@ export class DownloadService {
   constructor(private http: HttpClient) { }
 
   downloadFile(url: string): Observable<any> {
-    return this.http.get(url, { responseType: 'blob' })
+    return this.http.get(url, { responseType: 'blob' });
   }
 }

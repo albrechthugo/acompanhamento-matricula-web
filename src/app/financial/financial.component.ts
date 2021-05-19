@@ -1,4 +1,4 @@
-import { DownloadService } from './../services/download.service';
+import { DownloadService } from '../services/download/download.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MessageService } from 'primeng/api';
