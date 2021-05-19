@@ -24,7 +24,6 @@ export class SidemenuComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.showSideMenu();
-    this.setMenuItemsByRole();
   }
 
   ngOnDestroy(): void {
@@ -58,6 +57,7 @@ export class SidemenuComponent implements OnInit, OnDestroy {
     this.subscription = this.router.events.pipe(
       filter((event: Event): event is NavigationStart => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
+        this.setMenuItemsByRole();
         if (event.url === '/solicitarCadastro' || event.url === '/relatorioMatriculas/data' || event.url === '/') {
           this.canShowSideMenu = false;
         } else {

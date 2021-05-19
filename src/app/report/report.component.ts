@@ -4,6 +4,7 @@ import { ReportService } from '../services/report/report.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { MessageUtils } from '../utils/message-utils';
+import { range } from 'rxjs';
 
 @Component({
   selector: 'app-report',
@@ -38,7 +39,11 @@ export class ReportComponent implements OnInit {
   public downloadFile(): void {
     if (this.form.valid) {
       this.canBlockUi = true;
-      this.reportService.getReport(this.form?.get('startDate')?.value, this.form?.get('endDate')?.value)
+      const rangeDate = {
+        startDate: new Date(this.form?.get('startDate')?.value),
+        endDate: new Date(this.form?.get('endDate')?.value)
+      };
+      this.reportService.getReport(rangeDate.startDate, rangeDate.endDate)
         .subscribe(students => {
           this.canBlockUi = false;
           this.reportService.studentsReport.next(students);

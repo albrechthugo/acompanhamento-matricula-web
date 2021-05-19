@@ -1,8 +1,8 @@
 export class DateUtils {
 
-  public static getOneMonthBack(nowDate: Date): Date {
-    const oneMonthBackDate = nowDate;
-    oneMonthBackDate.setDate(oneMonthBackDate.getDate() - 30);
-    return oneMonthBackDate;
+  public static getOneMonthBack(): Date {
+    const nowDate = new Date();
+    const initialDate = new Date().setDate(nowDate.getDate() - 30);
+    return new Date(initialDate);
   }
 }

@@ -1,5 +1,5 @@
 import { AuthService } from './../../../auth/auth.service';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Event, NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeRouteEvents();
-    this.subscribeUserAuthenticated();
   }
 
   ngOnDestroy(): void {
@@ -39,6 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription = this.router.events
     .pipe(filter((event: Event): event is NavigationStart => event instanceof NavigationStart))
     .subscribe((event: NavigationStart) => {
+      this.subscribeUserAuthenticated();
       if (event.url === '/solicitarCadastro' || event.url === '/relatorioMatriculas/data') {
         this.title = event.url === '/solicitarCadastro' ? 'solicitar cadastro' : 'relatório de matrículas';
         this.headerTitle.nativeElement.id = '';

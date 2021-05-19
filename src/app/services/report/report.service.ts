@@ -25,7 +25,7 @@ export class ReportService {
 
   getDashboardReport(): Observable<StudentReportDto[]> {
     const endDate = new Date();
-    const startDate = DateUtils.getOneMonthBack(endDate).toLocaleDateString();
-    return this.http.get<StudentReportDto[]>(`${this.baseUrl}/reports/student/?startDate=${startDate}&endDate=${endDate.toLocaleDateString()}`);
+    const startDate = DateUtils.getOneMonthBack();
+    return this.http.get<StudentReportDto[]>(`${this.baseUrl}/reports/student/?startDate=${startDate}&endDate=${endDate}`);
   }
 }
