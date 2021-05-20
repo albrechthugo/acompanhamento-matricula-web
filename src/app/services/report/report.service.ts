@@ -14,7 +14,7 @@ export class ReportService {
     return environment.API_URL;
   }
 
-  public studentsReport = new ReplaySubject<StudentReportDto[]>(1);
+  public studentsReport = new ReplaySubject<any>(1);
   public studentsReportSubject = this.studentsReport.asObservable();
 
   constructor(private http: HttpClient) { }

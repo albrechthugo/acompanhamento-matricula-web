@@ -4,9 +4,8 @@ import { ReportPdfComponent } from './report-pdf.component';
 import { TableModule } from 'primeng/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { i18nPipeModule } from '../../shared/pipes/i18n/i18n.pipe.module';
-import { StudentReportStatusPipe } from '../../shared/pipes/student-report-status/student-report-status.pipe';
 import { StudentReportStatusModule } from '../../shared/pipes/student-report-status/student-report-status.module';
+import { DatePipeModule } from '../../shared/pipes/date/date.module';
 
 @NgModule({
   declarations: [ReportPdfComponent],
@@ -16,7 +15,8 @@ import { StudentReportStatusModule } from '../../shared/pipes/student-report-sta
     TableModule,
     ReactiveFormsModule,
     RouterModule,
-    StudentReportStatusModule
+    StudentReportStatusModule,
+    DatePipeModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

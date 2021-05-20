@@ -4,7 +4,7 @@
       <div class="data-input">
         <div>
           <label>{{ 'data inicial' | uppercase }}</label>
-          <span>02/02/2020</span>
+          <span>{{rangeDate?.startDate | brazilianDate}}</span>
         </div>
 
         <i class="pi pi-calendar"></i>
@@ -13,7 +13,7 @@
       <div class="data-input">
         <div>
           <label>{{ 'data final ' | uppercase }}</label>
-          <span>02/02/2020</span>
+          <span>{{rangeDate?.endDate | brazilianDate}}</span>
         </div>
 
         <i class="pi pi-calendar"></i>

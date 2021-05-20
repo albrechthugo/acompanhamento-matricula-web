@@ -10,6 +10,7 @@ import { ReportService } from '../../services/report/report.service';
 export class ReportPdfComponent implements OnInit {
 
   public studentsReport: StudentReportDto[] = [];
+  public rangeDate: any;
 
   constructor(private reportService: ReportService) { }
 
@@ -18,8 +19,12 @@ export class ReportPdfComponent implements OnInit {
   }
 
   private subscribeStudentReports(): void {
-    this.reportService.studentsReportSubject.subscribe(students => {
-      this.studentsReport = students;
+    this.reportService.studentsReportSubject.subscribe(response => {
+      this.studentsReport = response.students;
+      this.rangeDate = {
+        startDate: response.startDate,
+        endDate: response.endDate,
+      };
     });
   }
 }

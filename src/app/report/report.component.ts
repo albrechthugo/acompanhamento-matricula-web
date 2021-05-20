@@ -46,7 +46,7 @@ export class ReportComponent implements OnInit {
       this.reportService.getReport(rangeDate.startDate, rangeDate.endDate)
         .subscribe(students => {
           this.canBlockUi = false;
-          this.reportService.studentsReport.next(students);
+          this.reportService.studentsReport.next({students, startDate: rangeDate.startDate, endDate: rangeDate.endDate});
           this.router.navigate(['relatorioMatriculas/data']);
         }, () => {
           this.canBlockUi = false;

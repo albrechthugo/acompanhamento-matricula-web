@@ -37,15 +37,15 @@ export class SidemenuComponent implements OnInit, OnDestroy {
       if (user.role === Roles.ADMIN) {
         this.menuItems = menuUtils.menuItems;
       } else if (user.role === Roles.FINANCE) {
-        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[2]];
+        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[2], menuUtils.menuItems[6]];
       } else if (user.role === Roles.CORRECTOR) {
-        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[5]];
+        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[5], menuUtils.menuItems[6]];
       } else if (user.role === Roles.MARKET_RELATIONSHIP) {
-        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[1]];
+        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[1], menuUtils.menuItems[6]];
       } else if (user.role === Roles.SECRETARY) {
-        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[4]];
+        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[4], menuUtils.menuItems[6]];
       } else if (user.role === Roles.VESTIBULAR_SUPPORT) {
-        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[3]];
+        this.menuItems = [menuUtils.menuItems[0], menuUtils.menuItems[3], menuUtils.menuItems[6]];
       } else {
         this.menuItems = [];
       }
