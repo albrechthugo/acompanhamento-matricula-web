@@ -12,6 +12,7 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessageService } from 'primeng/api';
+import { CpfMaskModule } from 'src/app/shared/pipes/cpf-mask/cpf-mask.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MessageService } from 'primeng/api';
     StudentReportStatusModule,
     BlockUIModule,
     ToastModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CpfMaskModule
   ],
   providers: [MessageService]
 })

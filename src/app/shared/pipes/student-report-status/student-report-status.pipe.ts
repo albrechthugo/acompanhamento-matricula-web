@@ -15,7 +15,7 @@ export class StudentReportStatusPipe implements PipeTransform {
       case StudentStatusEnum.PENDING_REGISTRATION:
         return 'PENDENTE';
       default:
-        return '';
+        return 'NÃO INFORMADO';
     }
   }
 

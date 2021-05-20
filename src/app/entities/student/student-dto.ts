@@ -7,5 +7,5 @@ export interface StudentDto {
   email: string;
   phone: string;
   documents?: Document[];
-  status?: StudentStatusEnum;
+  studentStatus?: StudentStatusEnum;
 }

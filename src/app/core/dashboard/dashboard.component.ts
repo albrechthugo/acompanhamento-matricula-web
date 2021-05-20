@@ -14,7 +14,9 @@ import { retry } from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
 
+  public frozenColumn: any;
   public chartData: any;
+  public chartOptions: any;
   public students: StudentDto[] = [];
   public canBlockUi = false;
   private pendingStudents: StudentDto[] = [];
@@ -42,15 +44,27 @@ export class DashboardComponent implements OnInit {
         ]
       }]
     };
+
+    this.chartOptions = {
+      scales: {
+        yAxes:  [{
+            ticks: {
+                min: 0,
+                max: 1000
+            }
+        }]
+    }
+    };
   }
 
   private getReportData(): void {
     this.canBlockUi = true;
     this.studentService.getAll().subscribe(students => {
       this.students = students;
-      this.completedStudents = students.filter(student => student.status === StudentStatusEnum.COMPLETED_REGISTRATION);
-      this.pendingStudents = students.filter(student => student.status === StudentStatusEnum.PENDING_REGISTRATION);
-      this.canceledStudents = students.filter(student => student.status === StudentStatusEnum.CANCELED_REGISTRATION);
+      this.completedStudents = students.filter(student => student.studentStatus === StudentStatusEnum.COMPLETED_REGISTRATION);
+      this.pendingStudents = students.filter(student => student.studentStatus === StudentStatusEnum.PENDING_REGISTRATION);
+      this.canceledStudents = students.filter(student => student.studentStatus === StudentStatusEnum.CANCELED_REGISTRATION);
+      this.setChartConfig();
       this.canBlockUi = false;
     }, () => {
       this.messageService.add(MessageUtils.GetInfoError());
