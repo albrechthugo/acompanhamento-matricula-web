@@ -20,7 +20,7 @@ export class StudentBaseForm {
   constructor(fb: FormBuilder) {
     this._form = fb.group({
       name: [null, Validators.required],
-      cpf: [null, [Validators.required, MyValidators.validateCpf]],
+      cpf: [null, [Validators.required, MyValidators.validateCpf]]
     });
   }
 }

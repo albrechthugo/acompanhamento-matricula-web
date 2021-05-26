@@ -38,19 +38,52 @@
         </form>
       </div>
 
-      <div class="p-col-12">
+      <div *ngIf="studentDocuments.length" class="p-col-12">
         <section class="actions-container">
-          <app-widget
-            icon="pi pi-download"
-            label="download documentos"
-            [disableWidget]="canDisableActions">
-          </app-widget>
+          <p-accordion
+            class="p-xl-3 p-lg-3 p-md-4 p-sm-12 p-pl-0 p-mt-4"
+            [multiple]="true">
+            <p-accordionTab>
+              <ng-template pTemplate="header">
+                <div class="accordion-header">
+                  <p>{{'download documentos' | uppercase}}</p>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <div *ngFor="let doc of studentDocuments" class="accordion-content">
+                  <button
+                    pButton
+                    icon="pi pi-download"
+                    [label]="doc.documentType | documentType"
+                    (click)="download(doc.url)"
+                    type="button"
+                    class="p-button-outlined p-button-info p-button-lg tamanho-fixo">
+                  </button>
+                </div>
+              </ng-template>
+            </p-accordionTab>
+          </p-accordion>
 
-          <app-widget
-            icon="pi pi-download"
-            label="upload contrato"
-            [disableWidget]="canDisableActions">
-          </app-widget>
+          <div class="form-field p-xl-9 p-lg-9 p-md-8 p-sm-12 p-p-0 upload-input">
+            <label>{{ 'upload contrato' | uppercase }}</label>
+            <input
+              pInputText
+              type="text"
+              placeholder="joao_silva_contrato.pdf"
+              disabled
+            >
+
+            <p-fileUpload
+              mode="basic"
+              name="contrato"
+              [multiple]="false"
+              (uploadHandler)="sendFile($event, 'CONTRACT')"
+              [customUpload]="true"
+              icon="pi pi-upload"
+              [showUploadButton]=true
+              [maxFileSize]="50000">
+            </p-fileUpload>
+          </div>
         </section>
       </div>
     </div>

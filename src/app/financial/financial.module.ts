@@ -14,8 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
-import { WidgetModule } from '../shared/components/widget/widget.module';
 import { MessageService } from 'primeng/api';
+import { AccordionModule } from 'primeng/accordion';
+import { DocumentTypePipeModule } from '../shared/pipes/document-type-pipe/document-type-pipe.module';
 
 @NgModule({
   declarations: [FinancialComponent],
@@ -34,7 +35,8 @@ import { MessageService } from 'primeng/api';
     BlockUIModule,
     ProgressSpinnerModule,
     ToastModule,
-    WidgetModule
+    AccordionModule,
+    DocumentTypePipeModule
   ],
   providers: [MessageService]
 })
