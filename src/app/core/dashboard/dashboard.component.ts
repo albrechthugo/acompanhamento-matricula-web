@@ -1,11 +1,12 @@
 import { ReportService } from './../../services/report/report.service';
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { retry } from 'rxjs/operators';
+import { StudentStatusEnum } from '../../entities/student/status/student-status-enum';
 import { StudentDto } from '../../entities/student/student-dto';
 import { StudentService } from '../../services/student/student.service';
-import { StudentStatusEnum } from '../../entities/student/status/student-status-enum';
-import { MessageService } from 'primeng/api';
 import { MessageUtils } from '../../utils/message-utils';
-import { retry } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,19 +24,21 @@ export class DashboardComponent implements OnInit {
   private canceledStudents: StudentDto[] = [];
   private completedStudents: StudentDto[] = [];
 
-  constructor(private reportService: ReportService,
-              private studentService: StudentService,
-              private messageService: MessageService) { }
+  constructor(private studentService: StudentService,
+              private messageService: MessageService,
+              private reportService: ReportService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.setChartConfig();
-    this.getReportData();
+    this.getChartData();
   }
 
   private setChartConfig(): void {
     this.chartData = {
       labels: ['MATRICULADOS', 'PENDENTES', 'DESISTÊNCIAS'],
       datasets: [{
+        label: 'MATRICULADOS' ,
         backgroundColor: ['#8E1291', '#FF641A', '#FF0000'],
         data: [
           this.completedStudents.length,
@@ -57,7 +60,7 @@ export class DashboardComponent implements OnInit {
     };
   }
 
-  private getReportData(): void {
+  private getChartData(): void {
     this.canBlockUi = true;
     this.studentService.getAll().subscribe(students => {
       this.students = students;
@@ -70,5 +73,19 @@ export class DashboardComponent implements OnInit {
       this.messageService.add(MessageUtils.GetInfoError());
       retry();
     });
+  }
+
+  public getReport(): void {
+    this.canBlockUi = true;
+    this.reportService.getDashboardReport().subscribe(students => {
+      this.canBlockUi = false;
+      this.reportService.studentsReport.next({
+        students,
+        startDate: null,
+        endDate: null,
+        isDashboardReport: true
+      });
+      this.router.navigate(['relatorioMatriculas/data']);
+    }, () => { });
   }
 }

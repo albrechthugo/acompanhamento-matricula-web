@@ -9,8 +9,13 @@ import { ReportService } from '../../services/report/report.service';
 })
 export class ReportPdfComponent implements OnInit {
 
+  public get isDashboardReport(): boolean {
+    return this._isDashboardReport;
+  }
+
   public studentsReport: StudentReportDto[] = [];
   public rangeDate: any;
+  private _isDashboardReport = false;
 
   constructor(private reportService: ReportService) { }
 
@@ -20,10 +25,11 @@ export class ReportPdfComponent implements OnInit {
 
   private subscribeStudentReports(): void {
     this.reportService.studentsReportSubject.subscribe(response => {
+      this._isDashboardReport = response.isDashboardReport;
       this.studentsReport = response.students;
       this.rangeDate = {
-        startDate: response.startDate,
-        endDate: response.endDate,
+        startDate: response.startDate ? response.startDate : '',
+        endDate: response.endDate ? response.endDate : '',
       };
     });
   }

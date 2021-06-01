@@ -73,9 +73,22 @@
   }
 }
 
+@media (max-width: 1450px) {
+  .chart-container {
+    margin-top: 350px;
+  }
+}
+
 @media (max-width: 1080px) {
   .content-wrapper {
     padding-left: 0;
+  }
+}
+
+@media (max-width: 641px) {
+  .chart-container {
+    margin-top: 950px;
+    padding-top: 0;
   }
 }
 
