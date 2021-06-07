@@ -8,25 +8,27 @@
   overflow-x: hidden;
 }
 
-.page-title, .pi-download {
+.page-title, .download-exam {
   position: absolute;
-  top: 110px;
   color: var(--purple);
 }
 
 .page-title {
   left: 290px;
+  top: 101px;
 }
 
-.pi-download {
+.download-exam {
   cursor: pointer;
   right: 60px;
+  top: 110px;
   transition: 0.2s;
-  font-size: 2.4rem;
+  font-size: 1.1rem;
 }
 
-.pi-download:hover {
+.download-exam:hover {
   opacity: 70%;
+  text-decoration: underline;
 }
 
 .form-container {

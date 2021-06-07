@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  public frozenColumn: any;
   public chartData: any;
   public chartOptions: any;
   public students: StudentDto[] = [];

@@ -4,7 +4,9 @@
       {{'status de matrículas' | uppercase}}
     </h1>
 
-    <i (click)="getReport()" class="pi pi-download"></i>
+    <span (click)="getReport()" class="report">
+      {{'visualizar relatório' | uppercase}}
+    </span>
 
     <div class="chart-container">
       <p-chart

@@ -16,6 +16,6 @@ export class CorrectorService {
   constructor(private http: HttpClient) { }
 
   sendCorrection(correctedExam: CorrectedExamDto): Observable<any> {
-    return this.http.post(`${this.baseUrl}/grades`, correctedExam);
+    return this.http.put(`${this.baseUrl}/grades`, correctedExam);
   }
 }
