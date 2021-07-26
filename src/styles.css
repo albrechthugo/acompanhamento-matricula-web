@@ -10,6 +10,7 @@
   --pink: #F60071;
   --gray: #CCC;
   --black: #000;
+  --blue: #5498D8;
 
   /* FONT WEIGHT */
 
@@ -40,13 +41,13 @@ html,
 body {
   width: 100vw;
   height: 100vh;
-  background-color: var(--white);
+  background-color: #fbfbfb;
 }
 
 .container {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .btn-link {

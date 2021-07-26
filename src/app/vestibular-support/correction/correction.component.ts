@@ -1,10 +1,13 @@
+import { environment } from './../../../environments/environment.prod';
+import { ExamService } from './../../services/exam/exam.service';
 import { MessageUtils } from './../../utils/message-utils';
 import { StudentService } from './../../services/student/student.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { MenuUtils } from '../../utils/menu-utils';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyValidators } from '../../shared/validators/validators';
+import { Utils } from '../../utils/utils';
 
 @Component({
   selector: 'app-correction',
@@ -12,6 +15,14 @@ import { MyValidators } from '../../shared/validators/validators';
   styleUrls: ['./correction.component.css']
 })
 export class CorrectionComponent implements OnInit {
+
+  public get cpfInput(): AbstractControl {
+    return this.form.get('cpf') as AbstractControl;
+  }
+
+  public get nameInput(): AbstractControl {
+    return this.form.get('name') as AbstractControl;
+  }
 
   public form = new FormGroup({
     name: new FormControl(),
@@ -21,12 +32,14 @@ export class CorrectionComponent implements OnInit {
 
   public canBlockUi = false;
   public tabItems: MenuItem[] = [];
+  public fileUrl = '';
   private menuUtils = new MenuUtils();
 
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private examService: ExamService
     ) { }
 
   ngOnInit(): void {
@@ -48,17 +61,23 @@ export class CorrectionComponent implements OnInit {
     this.form.get('examFile')?.disable();
   }
 
+  public onCpfNewValue(cpf: string): void {
+    if (cpf.length === 11) {
+      this.cpfInput?.setValue(Utils.formatCpf(cpf));
+    }
+  }
+
   public getStudentInfo(cpf: string): void {
-    if (this.form.get('cpf')?.valid) {
+    if (this.cpfInput?.valid) {
       this.canBlockUi = true;
 
-      this.studentService.getById(cpf).subscribe(student => {
+      this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
         this.canBlockUi = false;
 
-        this.form.get('cpf')?.setValue(student.cpf);
-        this.form.get('cpf')?.disable();
-        this.form.get('name')?.setValue(student.name);
-        this.form.get('name')?.disable();
+        this.cpfInput?.setValue(student.cpf);
+        this.cpfInput?.disable();
+        this.nameInput?.setValue(student.name);
+        this.nameInput?.disable();
       }, () => {
         this.messageService.add(MessageUtils.GetInfoError());
         this.canBlockUi = false;
@@ -66,7 +85,22 @@ export class CorrectionComponent implements OnInit {
     }
   }
 
-  public afterSelectFile(event: any): void {
-    this.form.get('examFile')?.setValue(event.currentFiles[0].name);
+  public upload(event: any): void {
+    this.canBlockUi = true;
+
+    this.form.get('examFile')?.setValue(event.files[0].name);
+    this.examService.upload(event.files, Utils.noMaskCpf(this.cpfInput.value))
+      .subscribe(() => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.GenericSuccess());
+        this.form.reset();
+        this.cpfInput.enable();
+        this.nameInput.enable();
+      }, () => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.GenericError());
+        this.cpfInput.enable();
+        this.nameInput.enable();
+      });
   }
 }

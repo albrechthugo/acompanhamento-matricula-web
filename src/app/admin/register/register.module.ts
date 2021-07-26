@@ -1,3 +1,5 @@
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { BlockUIModule } from 'primeng/blockui';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterRoutingModule } from './register-routing.module';
@@ -27,7 +29,9 @@ import { MessageService } from 'primeng/api';
     DropdownModule,
     RouterModule,
     TabMenuModule,
-    ToastModule
+    ToastModule,
+    BlockUIModule,
+    ProgressSpinnerModule
   ],
   providers: [MessageService]
 })

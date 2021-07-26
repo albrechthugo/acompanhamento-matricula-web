@@ -1,0 +1,98 @@
+<div class="container flex-column">
+  <main class="content-wrapper">
+    <h1>
+      {{'financeiro' | uppercase}}
+    </h1>
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <form [formGroup]="studentBaseForm.form" class="form-container p-grid p-ai-start vertical-container">
+          <div class="form-field p-xl-3 p-lg-3 p-md-4 p-sm-12 cpf-input">
+            <label>{{ 'cpf' | uppercase }}</label>
+            <input
+              pInputText
+              type="text"
+              placeholder="000.000.000-00"
+              formControlName="cpf"
+              (ngModelChange)="onCpfNewValue($event)"
+            >
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-search"
+              class="p-button-rounded p-button-help p-button-lg p-button-text"
+              (click)="getStudentInfo(studentBaseForm.cpf?.value)">
+            </button>
+          </div>
+
+          <div class="form-field p-xl-9 p-lg-9 p-md-8 p-sm-12">
+            <label>{{ 'nome' | uppercase }}</label>
+            <input
+              pInputText
+              type="text"
+              [placeholder]="'joão da silva' | uppercase"
+              formControlName="name"
+            >
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="studentDocuments.length" class="p-col-12">
+        <section class="actions-container">
+          <p-accordion
+            class="p-xl-3 p-lg-3 p-md-4 p-sm-12 p-pl-0 p-mt-4"
+            [multiple]="true">
+            <p-accordionTab>
+              <ng-template pTemplate="header">
+                <div class="accordion-header">
+                  <p>{{'download documentos' | uppercase}}</p>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <div *ngFor="let doc of studentDocuments" class="accordion-content">
+                  <button
+                    pButton
+                    icon="pi pi-download"
+                    [label]="doc.documentType | documentType"
+                    (click)="download(doc.url)"
+                    type="button"
+                    class="p-button-outlined p-button-info p-button-lg tamanho-fixo">
+                  </button>
+                </div>
+              </ng-template>
+            </p-accordionTab>
+          </p-accordion>
+
+          <div class="form-field p-xl-9 p-lg-9 p-md-8 p-sm-12 p-p-0 upload-input">
+            <label>{{ 'upload contrato' | uppercase }}</label>
+            <input
+              pInputText
+              type="text"
+              placeholder="joao_silva_contrato.pdf"
+              disabled
+            >
+
+            <p-fileUpload
+              mode="basic"
+              name="contrato"
+              [multiple]="false"
+              (uploadHandler)="sendFile($event, 'CONTRACT')"
+              [customUpload]="true"
+              icon="pi pi-upload"
+              [showUploadButton]=true
+              [maxFileSize]="50000">
+            </p-fileUpload>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<p-blockUI [blocked]="canBlockUi">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
+
+<p-toast position="top-center">
+</p-toast>

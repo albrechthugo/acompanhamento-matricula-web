@@ -18,13 +18,23 @@ export class MenuUtils {
     return this._secretaryTabItems;
   }
 
+  get canDisableUploadRoute(): boolean {
+    return this._disableUploadRoute;
+  }
+
+  set canDisableUploadRoute(value) {
+    this._disableUploadRoute = value;
+  }
+
+  private _disableUploadRoute = true;
+
   private _menuItems: MenuItem[] = [
     { label: 'INÍCIO', icon: PrimeIcons.HOME, routerLink: '/dashboard' },
     { label: 'RELAÇÃO MERCADO', icon: PrimeIcons.GLOBE, routerLink: '/relacaoMercado' },
     { label: 'FINANCEIRO', icon: PrimeIcons.DOLLAR, routerLink: '/financeiro' },
     { label: 'APOIO VESTIBULAR', icon: PrimeIcons.PENCIL, routerLink: '/apoioVestibular' },
     { label: 'SECRETARIA', icon: PrimeIcons.FOLDER, routerLink: '/secretaria' },
-    { label: 'CORRETOR', icon: PrimeIcons.CHECK_CIRCLE, routerLink: '/corretor' },
+    { label: 'CORRETOR', icon: PrimeIcons.CHECK_CIRCLE, routerLink: '/correcaoProva' },
     { label: 'RELATÓRIO', icon: PrimeIcons.CHART_BAR, routerLink: '/relatorioMatriculas' },
     { label: 'CADASTRO', icon: PrimeIcons.DESKTOP, routerLink: '/admin' }
   ];
@@ -40,7 +50,15 @@ export class MenuUtils {
   ];
 
   private _secretaryTabItems: MenuItem[] = [
-    { label: 'SECRETARIA', icon: PrimeIcons.BOOK, routerLink: '/secretaria/' },
-    { label: 'DOCUMENTOS', icon: PrimeIcons.CLOUD_UPLOAD, routerLink: '/secretaria/uploadDocumentos' }
+    {
+      label: 'SECRETARIA',
+      icon: PrimeIcons.BOOK,
+      routerLink: '/secretaria/'
+    },
+    {
+      label: 'DOCUMENTOS',
+      icon: PrimeIcons.CLOUD_UPLOAD, routerLink: '/secretaria/uploadDocumentos/',
+      disabled: this.canDisableUploadRoute
+    }
   ];
 }

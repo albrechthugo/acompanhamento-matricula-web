@@ -1,7 +1,3 @@
-.container {
-  overflow: hidden;
-}
-
 .tab-menu-top {
   position: absolute;
   left: 250px;
@@ -63,14 +59,19 @@
   width: 180px;
 }
 
+.cpf-input,
 .upload-input {
   position: relative;
 }
 
+.cpf-input button,
 .upload-input p-fileUpload {
-  right: 20px;
-  top: 46.5%;
   position: absolute;
+}
+
+.cpf-input button {
+  right: 10px;
+  top: 45%;
 }
 
 @media (max-width: 1080px) {

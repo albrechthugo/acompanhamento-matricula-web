@@ -6,7 +6,7 @@
       [activeItem]="tabItems[0]">
     </p-tabMenu>
 
-    <form [formGroup]="form" class="flex-column">
+    <form [formGroup]="employeeForm.form" class="flex-column">
       <div class="form-field">
         <label>{{ 'nome' | uppercase }}</label>
         <input
@@ -24,6 +24,7 @@
           type="text"
           placeholder="000.000.000-00"
           formControlName="cpf"
+          (ngModelChange)="onCpfNewValue($event)"
         >
       </div>
 
@@ -60,5 +61,9 @@
     </form>
   </main>
 </div>
+
+<p-blockUI [blocked]="canBlockUi">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
 
 <p-toast position="top-center"></p-toast>

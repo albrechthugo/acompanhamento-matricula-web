@@ -1,3 +1,4 @@
+import { AuthService } from './../../../auth/auth.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
@@ -11,6 +12,7 @@ import { CanShowHeaderDirectiveModule } from '../../directives/can-show-header.d
     CommonModule,
     CanShowHeaderDirectiveModule
   ],
+  providers: [AuthService],
   exports: [
     HeaderComponent
   ]

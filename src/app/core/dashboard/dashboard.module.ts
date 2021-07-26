@@ -7,7 +7,12 @@ import { MenuModule } from 'primeng/menu';
 import { RouterModule } from '@angular/router';
 import {ChartModule} from 'primeng/chart';
 import { TableModule } from 'primeng/table';
-import { PoChartModule } from '@po-ui/ng-components';
+import { StudentReportStatusModule } from '../../shared/pipes/student-report-status/student-report-status.module';
+import { BlockUIModule } from 'primeng/blockui';
+import { ToastModule } from 'primeng/toast';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MessageService } from 'primeng/api';
+import { CpfMaskModule } from 'src/app/shared/pipes/cpf-mask/cpf-mask.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,13 @@ import { PoChartModule } from '@po-ui/ng-components';
     RouterModule,
     ChartModule,
     TableModule,
-    PoChartModule
-  ]
+    ChartModule,
+    StudentReportStatusModule,
+    BlockUIModule,
+    ToastModule,
+    ProgressSpinnerModule,
+    CpfMaskModule
+  ],
+  providers: [MessageService]
 })
 export class DashboardModule { }

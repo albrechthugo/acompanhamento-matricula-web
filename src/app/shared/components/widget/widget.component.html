@@ -1,4 +1,7 @@
-<button class="action-wrapper">
+<button
+  [disabled]="disableWidget"
+  class="action-wrapper"
+  [ngClass]="{ 'desabilitado': disableWidget }">
   <span>{{label | uppercase}}</span>
   <i [class]="icon"></i>
   <i *ngIf="showNote" class="resultado">{{note}}</i>

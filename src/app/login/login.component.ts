@@ -1,3 +1,7 @@
+import { MessageUtils } from './../utils/message-utils';
+import { MessageService } from 'primeng/api';
+import { UserDto } from './../entities/user/user-dto';
+import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -5,13 +9,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
 
-  get user(): { email: string, password: string } {
+  get user(): UserDto {
     return {
-      email: this.userForm.get('email')?.value,
+      username: this.userForm.get('email')?.value,
       password: this.userForm.get('password')?.value
     };
   }
@@ -23,7 +28,10 @@ export class LoginComponent implements OnInit {
 
   public canBlockUi = false;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private authService: AuthService,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.formBuilder();
@@ -39,9 +47,13 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.userForm.valid) {
       this.canBlockUi = true;
-      setTimeout(() => {
-        this.router.navigateByUrl('/dashboard');
-      }, 3000);
+      this.authService.doLogin(this.user).subscribe(() => {
+        this.canBlockUi = false;
+        this.router.navigate(['dashboard']);
+      }, () => {
+        this.canBlockUi = false;
+        this.messageService.add(MessageUtils.LoginError());
+      });
     }
   }
 

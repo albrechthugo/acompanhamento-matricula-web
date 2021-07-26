@@ -1,3 +1,4 @@
+import { EmployeeForm } from './../../shared/forms/employee/employee.form';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { MenuUtils } from '../../utils/menu-utils';
@@ -8,6 +9,7 @@ import { EmployeeDto } from '../../entities/employee/employee-dto';
 import { EmployeeService } from '../../services/employee/employee.service';
 import { Router } from '@angular/router';
 import { MessageUtils } from '../../utils/message-utils';
+import { Utils } from '../../utils/utils';
 
 @Component({
   selector: 'app-register',
@@ -18,22 +20,17 @@ export class RegisterComponent implements OnInit {
 
   get employee(): EmployeeDto {
     return {
-      name: this.form.get('name')?.value,
-      cpf: this.form.get('cpf')?.value,
-      email: this.form.get('email')?.value,
-      role: this.form.get('role')?.value
+      name: this.employeeForm.name?.value,
+      cpf: Utils.noMaskCpf(this.employeeForm.cpf?.value),
+      email: this.employeeForm.email?.value,
+      role: this.employeeForm.role?.value,
     };
   }
 
-  public form = new FormGroup({
-    name: new FormControl(),
-    cpf: new FormControl(),
-    email: new FormControl(),
-    role: new FormControl()
-  });
-
+  public employeeForm: EmployeeForm;
   public tabItems: MenuItem[] = [];
   public roles: any[] = [];
+  public canBlockUi = false;
   private menuUtils = new MenuUtils();
   private rolesutils = new RolesUtils();
 
@@ -41,21 +38,13 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private employeeService: EmployeeService,
     private router: Router,
-    private messageService: MessageService) { }
+    private messageService: MessageService) {
+      this.employeeForm = new EmployeeForm(this.fb);
+    }
 
   ngOnInit(): void {
     this.setRoles();
     this.setTabItems();
-    this.formBuilder();
-  }
-
-  private formBuilder(): void {
-    this.form = this.fb.group({
-      name: [null, Validators.required],
-      cpf: [null, [Validators.required, MyValidators.validateCpf]],
-      email: [null, [Validators.required, Validators.email]],
-      role: [null, Validators.required]
-    });
   }
 
   private setTabItems(): void {
@@ -66,13 +55,22 @@ export class RegisterComponent implements OnInit {
     this.roles = this.rolesutils.roles;
   }
 
+  public onCpfNewValue(cpf: string): void {
+    if (cpf.length === 11) {
+      this.employeeForm.cpf?.setValue(Utils.formatCpf(cpf));
+    }
+  }
+
   public registration(): void {
-    if (this.form.valid) {
+    if (this.employeeForm.form.valid) {
+      this.canBlockUi = true;
       this.employeeService.create(this.employee)
         .subscribe(() => {
+          this.canBlockUi = false;
           this.messageService.add(MessageUtils.EmployeeSuccessRegistration());
           setTimeout(() => this.router.navigateByUrl('/admin/solicitacoes'), 1000);
         }, () => {
+          this.canBlockUi = false;
           this.messageService.add(MessageUtils.EmployeeErrorRegistration());
         });
     }

@@ -3,7 +3,7 @@
     <div class="form-container">
      <h1>{{ 'inserir dados do aluno' | uppercase }}</h1>
 
-     <form [formGroup]="form" class="flex-column">
+     <form [formGroup]="studentForm.form" class="flex-column">
        <div class="form-field">
          <label>{{ 'cpf' | uppercase }}</label>
          <input
@@ -11,6 +11,7 @@
           type="text"
           placeholder="000.000.000-00"
           formControlName="cpf"
+          (ngModelChange)="onCpfNewValue($event)"
          >
          <button
           *ngIf="canShowSearchStudentButton"
@@ -19,7 +20,7 @@
           type="button"
           icon="pi pi-search"
           class="p-button-rounded p-button-help p-button-lg p-button-text"
-          (click)="searchStudent(form.get('cpf')?.value)">
+          (click)="searchStudent(studentForm.cpf?.value)">
         </button>
 
         <button
@@ -72,3 +73,10 @@
     </div>
   </main>
 </div>
+
+<p-blockUI [blocked]="canBlockUi">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
+
+<p-toast position="top-center">
+</p-toast>

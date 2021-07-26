@@ -3,7 +3,7 @@ import { Message } from 'primeng/api';
 
 export class MessageUtils {
 
-  static EmployeeSuccessRegistration(): Message {
+  public static EmployeeSuccessRegistration(): Message {
     return {
       severity: MessagesEnum.SUCCESS,
       summary: 'Sucesso!',
@@ -11,7 +11,7 @@ export class MessageUtils {
     };
   }
 
-  static EmployeeErrorRegistration(): Message {
+  public static EmployeeErrorRegistration(): Message {
     return {
       severity: MessagesEnum.ERROR,
       summary: 'Erro!',
@@ -19,7 +19,7 @@ export class MessageUtils {
     };
   }
 
-  static EmployeeSuccessDelete(): Message {
+  public static EmployeeSuccessDelete(): Message {
     return {
       severity: MessagesEnum.SUCCESS,
       summary: 'Sucesso!',
@@ -27,7 +27,7 @@ export class MessageUtils {
     };
   }
 
-  static EmployeeErrorDelete(): Message {
+  public static EmployeeErrorDelete(): Message {
     return {
       severity: MessagesEnum.ERROR,
       summary: 'Erro!',
@@ -35,7 +35,7 @@ export class MessageUtils {
     };
   }
 
-  static EmployeeSuccessActive(): Message {
+  public static EmployeeSuccessActive(): Message {
     return {
       severity: MessagesEnum.SUCCESS,
       summary: 'Sucesso!',
@@ -43,7 +43,7 @@ export class MessageUtils {
     };
   }
 
-  static EmployeeErrorActive(): Message {
+  public static EmployeeErrorActive(): Message {
     return {
       severity: MessagesEnum.ERROR,
       summary: 'Erro!',
@@ -51,7 +51,7 @@ export class MessageUtils {
     };
   }
 
-  static SendExamToCorrectionSuccess(): Message {
+  public static SendExamToCorrectionSuccess(): Message {
     return {
       severity: MessagesEnum.SUCCESS,
       summary: 'Sucesso!',
@@ -59,7 +59,7 @@ export class MessageUtils {
     };
   }
 
-  static SendExamToCorrectionError(): Message {
+  public static SendExamToCorrectionError(): Message {
     return {
       severity: MessagesEnum.ERROR,
       summary: 'Erro!',
@@ -67,11 +67,67 @@ export class MessageUtils {
     };
   }
 
-  static GetInfoError(): Message {
+  public static GetInfoError(): Message {
     return {
       severity: MessagesEnum.ERROR,
       summary: 'Erro!',
       detail: 'Falha ao buscar dados'
+    };
+  }
+
+  public static RegistrationRequestError(): Message {
+    return {
+      severity: MessagesEnum.ERROR,
+      summary: 'Erro!',
+      detail: 'Falha na solicitação de cadastro'
+    };
+  }
+
+  public static RegistrationRequestSuccess(): Message {
+    return {
+      severity: MessagesEnum.SUCCESS,
+      summary: 'Sucesso!',
+      detail: 'Solicitação de cadastro enviada!'
+    };
+  }
+
+  public static StudentRegistrationSuccess(): Message {
+    return {
+      severity: MessagesEnum.SUCCESS,
+      summary: 'Sucesso!',
+      detail: 'Estudante criado!'
+    };
+  }
+
+  public static StudentRegistrationError(): Message {
+    return {
+      severity: MessagesEnum.ERROR,
+      summary: 'Erro!',
+      detail: 'Falha ao criar estudante'
+    };
+  }
+
+  public static GenericSuccess(): Message {
+    return {
+      severity: MessagesEnum.SUCCESS,
+      summary: 'Sucesso!',
+      detail: 'Sucesso'
+    };
+  }
+
+  public static GenericError(): Message {
+    return {
+      severity: MessagesEnum.ERROR,
+      summary: 'Erro',
+      detail: 'Tente novamente'
+    };
+  }
+
+  public static LoginError(): Message {
+    return {
+      severity: MessagesEnum.ERROR,
+      summary: 'Erro',
+      detail: 'Usuário e/ou senha inválido'
     };
   }
 }

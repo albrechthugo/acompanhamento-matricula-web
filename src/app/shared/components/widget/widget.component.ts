@@ -12,6 +12,7 @@ export class WidgetComponent implements OnInit {
   @Input() status = '';
   @Input() showNote = false;
   @Input() note = 0;
+  @Input() disableWidget = false;
 
   constructor() { }
 

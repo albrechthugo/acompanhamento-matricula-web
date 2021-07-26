@@ -1,0 +1,48 @@
+<div class="container flex-column">
+  <main class="content-wrapper">
+    <div class="data-container">
+      <div class="data-input">
+        <div>
+          <label>{{ 'data inicial' | uppercase }}</label>
+          <span>{{rangeDate?.startDate | brazilianDate}}</span>
+        </div>
+
+        <i class="pi pi-calendar"></i>
+      </div>
+
+      <div class="data-input">
+        <div>
+          <label>{{ 'data final ' | uppercase }}</label>
+          <span>{{rangeDate?.endDate | brazilianDate}}</span>
+        </div>
+
+        <i class="pi pi-calendar"></i>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <p-table [value]="studentsReport">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>{{'nome' | uppercase}}</th>
+            <th>{{'cpf' | uppercase}}</th>
+            <th>{{'email' | uppercase}}</th>
+            <th>{{'telefone' | uppercase}}</th>
+            <th>{{'data inscrição' | uppercase}}</th>
+            <th>{{'status' | uppercase}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student>
+          <tr>
+            <td>{{student.name}}</td>
+            <td>{{student.cpf}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.phone}}</td>
+            <td>{{student.creationDate}}</td>
+            <td>{{student.studentStatus | studentReportStatus}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </main>
+</div>
