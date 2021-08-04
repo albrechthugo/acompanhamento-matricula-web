@@ -1,40 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ReportService } from '../services/report/report.service';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { ReportService } from '../services/report/report.service';
 import { MessageUtils } from '../utils/message-utils';
-import { range } from 'rxjs';
 
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.css']
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent {
 
   public form = new FormGroup({
-    startDate: new FormControl(),
-    endDate: new FormControl()
+    startDate: new FormControl(null, Validators.required),
+    endDate: new FormControl(null, Validators.required)
   });
 
   public canBlockUi = false;
 
-  constructor(private fb: FormBuilder,
-              private reportService: ReportService,
+  constructor(private reportService: ReportService,
               private router: Router,
               private messageService: MessageService) { }
-
-  ngOnInit(): void {
-    this.setForm();
-  }
-
-  private setForm(): void {
-    this.form = this.fb.group({
-      startDate: [null, Validators.required],
-      endDate: [null, Validators.required]
-    });
-  }
 
   public downloadFile(): void {
     if (this.form.valid) {

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CorrectedExamDto } from '../entities/grade/corrected-exam-dto';
 import { GradeStatus } from '../entities/grade/status/grade-status-enum';
@@ -13,7 +18,7 @@ import { RatingCriteriaHelper } from './helpers/ rating-criteria';
 @Component({
   selector: 'app-corrector',
   templateUrl: './corrector.component.html',
-  styleUrls: ['./corrector.component.css']
+  styleUrls: ['./corrector.component.css'],
 })
 export class CorrectorComponent implements OnInit {
 
@@ -63,16 +68,17 @@ export class CorrectorComponent implements OnInit {
 
   public get gradesSum(): number {
     return (
-      this.apresentaConclusaoInput.value
-      + this.coesaoInput.value
-      + this.ortografiaInput.value
-      + this.numeroLinhasInput.value
-      + this.pontuacaoInput.value
-      + this.apresentaDesenvolvimentoInput.value
-      + this.apresentaIntroducaoInput.value
-      + this.tituloAdequadoInput.value
-      + this.temaObedecidoInput.value
-      ) / 9;
+      (this.apresentaConclusaoInput.value +
+        this.coesaoInput.value +
+        this.ortografiaInput.value +
+        this.numeroLinhasInput.value +
+        this.pontuacaoInput.value +
+        this.apresentaDesenvolvimentoInput.value +
+        this.apresentaIntroducaoInput.value +
+        this.tituloAdequadoInput.value +
+        this.temaObedecidoInput.value) /
+      9
+    );
   }
 
   public get correctionStatus(): GradeStatus {
@@ -83,44 +89,27 @@ export class CorrectorComponent implements OnInit {
   public canBlockUi = false;
 
   public form = new FormGroup({
-    name: new FormControl(),
-    cpf: new FormControl(),
-    temaObedecido: new FormControl(),
-    tituloAdequado: new FormControl(),
-    apresentaIntroducao: new FormControl(),
-    apresentaDesenvolvimento: new FormControl(),
-    apresentaConclusao: new FormControl(),
-    numeroLinhas: new FormControl(),
-    coesao: new FormControl(),
-    ortografia: new FormControl(),
-    pontuacao: new FormControl(),
+    name: new FormControl(null),
+    cpf: new FormControl(null, Validators.required),
+    temaObedecido: new FormControl(null, Validators.required),
+    tituloAdequado: new FormControl(null, Validators.required),
+    apresentaIntroducao: new FormControl(null, Validators.required),
+    apresentaDesenvolvimento: new FormControl(null, Validators.required),
+    apresentaConclusao: new FormControl(null, Validators.required),
+    numeroLinhas: new FormControl(null, Validators.required),
+    coesao: new FormControl(null, Validators.required),
+    ortografia: new FormControl(null, Validators.required),
+    pontuacao: new FormControl(null, Validators.required),
   });
 
-  constructor(private fb: FormBuilder,
-              private studentService: StudentService,
-              private messageService: MessageService,
-              private correctorService: CorrectorService) { }
+  constructor(
+    private studentService: StudentService,
+    private messageService: MessageService,
+    private correctorService: CorrectorService
+  ) {}
 
   ngOnInit(): void {
-    this.setForm();
-  }
-
-  private setForm(): void {
-    this.form = this.fb.group({
-      name: [null],
-      cpf: [null, Validators.required],
-      temaObedecido: [null, Validators.required],
-      tituloAdequado: [null, Validators.required],
-      apresentaIntroducao: [null, Validators.required],
-      apresentaDesenvolvimento: [null, Validators.required],
-      apresentaConclusao: [null, Validators.required],
-      numeroLinhas: [null, Validators.required],
-      coesao: [null, Validators.required],
-      ortografia: [null, Validators.required],
-      pontuacao: [null, Validators.required],
-      concluido: [null, Validators.required]
-    });
-    this.form.get('name')?.disable();
+    this.nameInput?.disable();
   }
 
   public onCpfNewValue(cpf: string): void {
@@ -133,15 +122,18 @@ export class CorrectorComponent implements OnInit {
     if (this.form.get('cpf')?.valid) {
       this.canBlockUi = true;
 
-      this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(student => {
-        this.canBlockUi = false;
-        this.form.get('cpf')?.setValue(student.cpf);
-        this.form.get('cpf')?.disable();
-        this.form.get('name')?.setValue(student.name);
-      }, () => {
-        this.messageService.add(MessageUtils.GetInfoError());
-        this.canBlockUi = false;
-      });
+      this.studentService.getById(Utils.noMaskCpf(cpf)).subscribe(
+        (student) => {
+          this.canBlockUi = false;
+          this.form.get('cpf')?.setValue(student.cpf);
+          this.form.get('cpf')?.disable();
+          this.form.get('name')?.setValue(student.name);
+        },
+        () => {
+          this.messageService.add(MessageUtils.GetInfoError());
+          this.canBlockUi = false;
+        }
+      );
     }
   }
 
@@ -154,26 +146,38 @@ export class CorrectorComponent implements OnInit {
         finish: this.form.get('concluido')?.value,
         gradeStatus: this.correctionStatus,
         examGrades: [
-          { grade: this.apresentaConclusaoInput.value, topic: Topic.CONTAINS_CONCLUSION },
+          {
+            grade: this.apresentaConclusaoInput.value,
+            topic: Topic.CONTAINS_CONCLUSION,
+          },
           { grade: this.coesaoInput.value, topic: Topic.COHESION },
           { grade: this.ortografiaInput.value, topic: Topic.ORTHOGRAPHY },
           { grade: this.numeroLinhasInput.value, topic: Topic.NUMBER_OF_LINES },
           { grade: this.pontuacaoInput.value, topic: Topic.PUNCTUATION },
-          { grade: this.apresentaDesenvolvimentoInput.value, topic: Topic.CONTAINS_DEVELOPMENT },
-          { grade: this.apresentaIntroducaoInput.value, topic: Topic.CONTAINS_INTRODUCTION },
+          {
+            grade: this.apresentaDesenvolvimentoInput.value,
+            topic: Topic.CONTAINS_DEVELOPMENT,
+          },
+          {
+            grade: this.apresentaIntroducaoInput.value,
+            topic: Topic.CONTAINS_INTRODUCTION,
+          },
           { grade: this.tituloAdequadoInput.value, topic: Topic.PROPER_TITLE },
           { grade: this.temaObedecidoInput.value, topic: Topic.THEME_OBEYED },
-        ]
+        ],
       };
 
-      this.correctorService.sendCorrection(correctedExam).subscribe(() => {
-        this.canBlockUi = false;
-        this.messageService.add(MessageUtils.GenericSuccess());
-        this.form.reset();
-      }, () => {
-        this.canBlockUi = false;
-        this.messageService.add(MessageUtils.GenericError());
-      });
+      this.correctorService.sendCorrection(correctedExam).subscribe(
+        () => {
+          this.canBlockUi = false;
+          this.messageService.add(MessageUtils.GenericSuccess());
+          this.form.reset();
+        },
+        () => {
+          this.canBlockUi = false;
+          this.messageService.add(MessageUtils.GenericError());
+        }
+      );
     }
   }
 }

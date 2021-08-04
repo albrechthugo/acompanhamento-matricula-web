@@ -1,13 +1,12 @@
-import { environment } from './../../../environments/environment.prod';
-import { ExamService } from './../../services/exam/exam.service';
-import { MessageUtils } from './../../utils/message-utils';
-import { StudentService } from './../../services/student/student.service';
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, MessageService } from 'primeng/api';
-import { MenuUtils } from '../../utils/menu-utils';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MyValidators } from '../../shared/validators/validators';
+import { MenuUtils } from '../../utils/menu-utils';
 import { Utils } from '../../utils/utils';
+import { ExamService } from './../../services/exam/exam.service';
+import { StudentService } from './../../services/student/student.service';
+import { MessageUtils } from './../../utils/message-utils';
 
 @Component({
   selector: 'app-correction',
@@ -25,9 +24,9 @@ export class CorrectionComponent implements OnInit {
   }
 
   public form = new FormGroup({
-    name: new FormControl(),
-    cpf: new FormControl(),
-    examFile: new FormControl()
+    name: new FormControl(null, Validators.required),
+    cpf: new FormControl(null, [Validators.required, MyValidators.validateCpf]),
+    examFile: new FormControl(null, Validators.required)
   });
 
   public canBlockUi = false;
@@ -36,7 +35,6 @@ export class CorrectionComponent implements OnInit {
   private menuUtils = new MenuUtils();
 
   constructor(
-    private fb: FormBuilder,
     private studentService: StudentService,
     private messageService: MessageService,
     private examService: ExamService
@@ -44,21 +42,11 @@ export class CorrectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.setTabMenuItems();
-    this.formBuilder();
+    this.form.get('examFile')?.disable();
   }
 
   private setTabMenuItems(): void {
     this.tabItems = this.menuUtils.vestibularSupportTabItems;
-  }
-
-  private formBuilder(): void {
-    this.form = this.fb.group({
-      name: [null, Validators.required],
-      cpf: [null, [Validators.required, MyValidators.validateCpf]],
-      examFile: [null, Validators.required]
-    });
-
-    this.form.get('examFile')?.disable();
   }
 
   public onCpfNewValue(cpf: string): void {
