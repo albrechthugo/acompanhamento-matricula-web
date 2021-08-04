@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem, MessageService } from 'primeng/api';
 import { MyValidators } from 'src/app/shared/validators/validators';
 import { MenuUtils } from 'src/app/utils/menu-utils';
-import { Utils } from '../../utils/utils';
-import { MessageUtils } from '../../utils/message-utils';
-import { StudentService } from '../../services/student/student.service';
 import { ExamService } from '../../services/exam/exam.service';
+import { StudentService } from '../../services/student/student.service';
+import { MessageUtils } from '../../utils/message-utils';
+import { Utils } from '../../utils/utils';
 
 @Component({
   selector: 'app-exam',
@@ -29,8 +29,8 @@ export class ExamComponent implements OnInit {
 
   public form = new FormGroup({
     name: new FormControl(),
-    cpf: new FormControl(),
-    examUrl: new FormControl()
+    cpf: new FormControl(null, [Validators.required, MyValidators.validateCpf]),
+    examUrl: new FormControl(null, Validators.required)
   });
 
   public canBlockUi = false;
@@ -38,7 +38,6 @@ export class ExamComponent implements OnInit {
   private menuUtils = new MenuUtils();
 
   constructor(
-    private fb: FormBuilder,
     private messageService: MessageService,
     private studentService: StudentService,
     private examService: ExamService
@@ -46,19 +45,10 @@ export class ExamComponent implements OnInit {
 
   ngOnInit(): void {
     this.setTabMenuItems();
-    this.formBuilder();
   }
 
   private setTabMenuItems(): void {
     this.tabItems = this.menuUtils.vestibularSupportTabItems;
-  }
-
-  private formBuilder(): void {
-    this.form = this.fb.group({
-      name: [null, Validators.required],
-      cpf: [null, [Validators.required, MyValidators.validateCpf]],
-      examUrl: [null, Validators.required]
-    });
   }
 
   public onCpfNewValue(cpf: string): void {

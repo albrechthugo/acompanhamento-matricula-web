@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { DocumentEnum } from '../../entities/document/document-enum';
+import { EmployeeService } from '../../services/employee/employee.service';
 import { MenuUtils } from '../../utils/menu-utils';
-import { StudentService } from '../../services/student/student.service';
-import { MyValidators } from '../../shared/validators/validators';
 import { MessageUtils } from '../../utils/message-utils';
 import { Utils } from '../../utils/utils';
-import { ActivatedRoute } from '@angular/router';
-import { EmployeeService } from '../../services/employee/employee.service';
-import { DocumentEnum } from '../../entities/document/document-enum';
 
 @Component({
   selector: 'app-upload-docs',
@@ -20,11 +18,11 @@ export class UploadDocsComponent implements OnInit {
   public form = new FormGroup({
     name: new FormControl(),
     cpf: new FormControl(),
-    identityFile: new FormControl(),
-    residencialFile: new FormControl(),
-    schoolRecordFile: new FormControl(),
-    voterRegistrationFile: new FormControl(),
-    birthCertificateFile: new FormControl()
+    identityFile: new FormControl(null, Validators.required),
+    residencialFile: new FormControl(null, Validators.required),
+    schoolRecordFile: new FormControl(null, Validators.required),
+    voterRegistrationFile: new FormControl(null, Validators.required),
+    birthCertificateFile: new FormControl(null, Validators.required)
   });
 
   public canBlockUi = false;
@@ -32,9 +30,7 @@ export class UploadDocsComponent implements OnInit {
   private menuUtils = new MenuUtils();
   private cpfParam = '';
 
-  constructor(private fb: FormBuilder,
-              private studentService: StudentService,
-              private messageService: MessageService,
+  constructor(private messageService: MessageService,
               private employeeService: EmployeeService,
               private route: ActivatedRoute
   ) { }
@@ -42,7 +38,7 @@ export class UploadDocsComponent implements OnInit {
   ngOnInit(): void {
     this.getParamsFromUrl();
     this.setTabMenuItems();
-    this.formBuilder();
+    this.disableFileInputs();
   }
 
   private getParamsFromUrl(): void {
@@ -59,18 +55,6 @@ export class UploadDocsComponent implements OnInit {
 
   private setTabMenuItems(): void {
     this.tabItems = this.menuUtils.secretaryTabItems;
-  }
-
-  private formBuilder(): void {
-    this.form = this.fb.group({
-      identityFile: [null, Validators.required],
-      residencialFile: [null, Validators.required],
-      schoolRecordFile: [null, Validators.required],
-      voterRegistrationFile: [null, Validators.required],
-      birthCertificateFile: [null, Validators.required]
-    });
-
-    this.disableFileInputs();
   }
 
   private disableFileInputs(): void {
