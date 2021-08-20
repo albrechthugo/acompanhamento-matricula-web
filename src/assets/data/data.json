@@ -1,0 +1,57 @@
+{
+  "employees": [
+    {
+      "name": "Mock",
+      "cpf": "83162723000",
+      "email": "mock@gmail.com",
+      "role": "MARKET_RELATIONSHIP",
+      "id": "83162723000"
+    },
+    {
+      "name": "Mock 2",
+      "cpf": "87934653000",
+      "email": "mock2@gmail.com",
+      "role": "FINANCIAL",
+      "id": "87934653000"
+    },
+    {
+      "name": "Mock 3",
+      "cpf": "88780750001",
+      "email": "mock3@gmail.com",
+      "role": "FINANCIAL",
+      "id": "88780750001"
+    }
+  ],
+  "exams": [],
+  "reports": [],
+  "students": [
+    {
+      "cpf": "09556052020",
+      "name": "Student Mock 1",
+      "email": "student@gmail.com",
+      "phone": "45992345699",
+      "documents": [],
+      "studentStatus": "PENDING_REGISTRATION",
+      "id": "09556052020"
+    },
+    {
+      "cpf": "10625981057",
+      "name": "Student Mock 2",
+      "email": "student2@gmail.com",
+      "phone": "45992245699",
+      "documents": [],
+      "studentStatus": "PENDING_REGISTRATION",
+      "id": "10625981057"
+    },
+    {
+      "cpf": "44880430030",
+      "name": "Student Mock 3",
+      "email": "student3@gmail.com",
+      "phone": "45991345699",
+      "documents": [],
+      "studentStatus": "PENDING_REGISTRATION",
+      "id": "44880430030"
+    }
+  ],
+  "grades": []
+}

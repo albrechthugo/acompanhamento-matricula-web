@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -17,7 +17,7 @@ import { MessageUtils } from './../utils/message-utils';
   styleUrls: ['./login.component.css'],
   providers: [MessageService],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   get user(): UserDto {
     return {
@@ -39,6 +39,14 @@ export class LoginComponent {
     private authService: AuthService,
     private messageService: MessageService
   ) {}
+
+  ngOnInit(): void {
+    alert('Basta clicar no botão login para acessar o sistema');
+  }
+
+  public mockedLogin(): void {
+    this.router.navigate(['dashboard']);
+  }
 
   public login(): void {
     if (this.userForm.valid) {
